@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proxfield.Extensions.Caching.SQLite", "src\Proxfield.Extensions.Caching.SQLite\Proxfield.Extensions.Caching.SQLite.csproj", "{219DE49A-D835-4EA5-B008-A324EEDCDC95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FC7255DB-DF47-4795-B826-7A73CADF325E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{4E5E7FEC-ABEB-4F96-9158-79299BE85335}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "samples\Proxfield.Extensions.Caching.SQLite.Samples", "samples\Proxfield.Extensions.Caching.SQLite.Samples\Proxfield.Extensions.Caching.SQLite.Samples.csproj", "{757002AA-6B8C-4BFB-9C20-C0B2DB74E29E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "src\Proxfield.Extensions.Caching.SQLite.DependencyInjection", "src\Proxfield.Extensions.Caching.SQLite.DependencyInjection\Proxfield.Extensions.Caching.SQLite.DependencyInjection.csproj", "{AD0169E5-FBD2-4153-A2BC-409E39ADDF32}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{99916A22-F627-4427-873B-A679856514CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests\Proxfield.Extensions.Caching.SQLite.Tests", "tests\Proxfield.Extensions.Caching.SQLite.Tests\Proxfield.Extensions.Caching.SQLite.Tests.csproj", "{8430DF5F-26F0-4FD5-A9D7-6D7E676C58C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{219DE49A-D835-4EA5-B008-A324EEDCDC95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{219DE49A-D835-4EA5-B008-A324EEDCDC95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{219DE49A-D835-4EA5-B008-A324EEDCDC95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{219DE49A-D835-4EA5-B008-A324EEDCDC95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{757002AA-6B8C-4BFB-9C20-C0B2DB74E29E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{757002AA-6B8C-4BFB-9C20-C0B2DB74E29E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{757002AA-6B8C-4BFB-9C20-C0B2DB74E29E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{757002AA-6B8C-4BFB-9C20-C0B2DB74E29E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD0169E5-FBD2-4153-A2BC-409E39ADDF32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD0169E5-FBD2-4153-A2BC-409E39ADDF32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD0169E5-FBD2-4153-A2BC-409E39ADDF32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD0169E5-FBD2-4153-A2BC-409E39ADDF32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8430DF5F-26F0-4FD5-A9D7-6D7E676C58C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8430DF5F-26F0-4FD5-A9D7-6D7E676C58C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8430DF5F-26F0-4FD5-A9D7-6D7E676C58C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8430DF5F-26F0-4FD5-A9D7-6D7E676C58C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{219DE49A-D835-4EA5-B008-A324EEDCDC95} = {FC7255DB-DF47-4795-B826-7A73CADF325E}
+		{757002AA-6B8C-4BFB-9C20-C0B2DB74E29E} = {4E5E7FEC-ABEB-4F96-9158-79299BE85335}
+		{AD0169E5-FBD2-4153-A2BC-409E39ADDF32} = {FC7255DB-DF47-4795-B826-7A73CADF325E}
+		{8430DF5F-26F0-4FD5-A9D7-6D7E676C58C2} = {99916A22-F627-4427-873B-A679856514CA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A964DF03-6A99-4D11-8AC9-6921F54B8DB9}
+	EndGlobalSection
+EndGlobal
