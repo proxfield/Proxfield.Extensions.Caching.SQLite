@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proxfield.Extensions.Caching.SQLite", "src\Proxfield.Extensions.Caching.SQLite\Proxfield.Extensions.Caching.SQLite.csproj", "{219DE49A-D835-4EA5-B008-A324EEDCDC95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "src\Proxfield.Extensions.Caching.SQLite", "src\Proxfield.Extensions.Caching.SQLite\Proxfield.Extensions.Caching.SQLite.csproj", "{219DE49A-D835-4EA5-B008-A324EEDCDC95}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FC7255DB-DF47-4795-B826-7A73CADF325E}"
 EndProject

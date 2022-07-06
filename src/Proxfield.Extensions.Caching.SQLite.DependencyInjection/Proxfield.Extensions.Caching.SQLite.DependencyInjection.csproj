@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Proxfield.Extensions.Caching.SQLite\Proxfield.Extensions.Caching.SQLite.csproj" />
+    <ProjectReference Include="..\Proxfield.Extensions.Caching.SQLite\Proxfield.Extensions.Caching.SQLite.csproj" />
   </ItemGroup>
 
 </Project>

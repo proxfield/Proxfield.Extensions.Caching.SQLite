@@ -1,4 +1,4 @@
-﻿
+
 
 using Proxfield.Extensions.Caching.SQLite;
 
@@ -12,5 +12,9 @@ for (int i = 0; i < 1000; i++)
     cache.SetAsString($"test_{i}", i.ToString());
 }
 
-var value = cache.GetAsString("test1");
+cache.GetAsString("test1");
+cache.SetAsObject<User>("key", new User() { Name = "Jose" });
+
+cache.GetAsString("test1");
+
 Console.WriteLine(value);
