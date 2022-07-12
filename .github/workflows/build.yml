@@ -79,7 +79,7 @@ jobs:
         path: code-coverage-results.md
 
   publish:
-    rruns-on: ubuntu-latest
+    runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
             - name: Setup .Net Core
