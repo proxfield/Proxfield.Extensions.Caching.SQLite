@@ -19,9 +19,9 @@ jobs:
           run: dotnet restore 
         - name: Building 
           run: dotnet build --configuration Release
-        # - name: Create Nuget Package
-        #   run: dotnet pack -c Release -o ./packages /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite/releases/tag/${{ github.event.release.tag_name }}"
-        #   working-directory: ./Proxfield.Extensions.Caching.SQLite
+        - name: Create Nuget Package
+          run: dotnet pack -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite/releases/tag/${{ github.event.release.tag_name }}"
+          working-directory: ./Proxfield.Extensions.Caching.SQLite
         - name: Archive Nuget Package
           uses: actions/upload-artifact@v1
           with:
