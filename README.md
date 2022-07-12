@@ -47,6 +47,7 @@ Or either as a complex object:
 this.cache.SetAsObject<User>("users/1", new User() { Name = "Jose" });
 var user = this.cache.GetAsObject<User>("users/1");
 ```
+The following list constains all methods avaliable currently on the library.
 
 | Method | Description |
 | ------ | ----------- |
