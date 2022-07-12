@@ -7,41 +7,41 @@ on:
         branches: [ "main" ]
 
 jobs:
-    release:   
-        runs-on: ubuntu-latest    
-        needs: coverage
-        if: github.ref == 'refs/heads/main'
-        steps:  
-        #Push NuGet package to GitHub packages
-        - name: Packing project
-        run: dotnet pack -o ./packages
-        - uses: actions/checkout@v2
-        with:
-            fetch-depth: 0       
-        - name: Download nuget package artifact
-        uses: actions/download-artifact@v1.0.0
-        with:
-            name: packages
-        - name: Prep packages
-        run: dotnet nuget add source --username marcoaslima --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/proxfield/index.json"
-        - name: Push package to GitHub packages 
-        if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only release if there has been a commit/version change  
-        run: dotnet nuget push packages/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }}  --source "github"
-        
-        #Create release
-        - name: Create Release
-        if: 1 == 0 #needs.build.outputs.CommitsSinceVersionSource > 0 #Only release if there has been a commit/version change
-        uses: actions/create-release@v1
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-            tag_name: ${{ needs.build.outputs.Version }}
-            release_name: Release ${{ needs.build.outputs.Version }}
-        - name: Create Release
-        if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only release if there has been a commit/version change
-        uses: ncipollo/release-action@v1
-        with:
-            tag: ${{ needs.build.outputs.Version }}
-            name: Release ${{ needs.build.outputs.Version }}
-            artifacts: "packages/*"
-            token: ${{ secrets.GITHUB_TOKEN }}
+  release:   
+    runs-on: ubuntu-latest    
+    needs: coverage
+    if: github.ref == 'refs/heads/main'
+    steps:  
+    #Push NuGet package to GitHub packages
+    - name: Packing project
+    run: dotnet pack -o ./packages
+    - uses: actions/checkout@v2
+    with:
+        fetch-depth: 0       
+    - name: Download nuget package artifact
+    uses: actions/download-artifact@v1.0.0
+    with:
+        name: packages
+    - name: Prep packages
+    run: dotnet nuget add source --username marcoaslima --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/proxfield/index.json"
+    - name: Push package to GitHub packages 
+    if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only release if there has been a commit/version change  
+    run: dotnet nuget push packages/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }}  --source "github"
+    
+    #Create release
+    - name: Create Release
+    if: 1 == 0 #needs.build.outputs.CommitsSinceVersionSource > 0 #Only release if there has been a commit/version change
+    uses: actions/create-release@v1
+    env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+    with:
+        tag_name: ${{ needs.build.outputs.Version }}
+        release_name: Release ${{ needs.build.outputs.Version }}
+    - name: Create Release
+    if: needs.build.outputs.CommitsSinceVersionSource > 0 #Only release if there has been a commit/version change
+    uses: ncipollo/release-action@v1
+    with:
+        tag: ${{ needs.build.outputs.Version }}
+        name: Release ${{ needs.build.outputs.Version }}
+        artifacts: "packages/*"
+        token: ${{ secrets.GITHUB_TOKEN }}
