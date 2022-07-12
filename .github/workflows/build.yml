@@ -45,6 +45,12 @@ jobs:
     if: github.ref == 'refs/heads/main' # only run job if on the main branch 
 
     steps:
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Restoring Package
+      run: dotnet restore 
     - name: Building 
       run: dotnet build --configuration Release
     - name: Test
