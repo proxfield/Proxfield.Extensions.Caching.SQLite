@@ -66,7 +66,7 @@ var user = this.cache.GetAsObject<User>("users/1");
 ## Platform Support
 SQLite Caching is compiled for DotNet 6, soon there will versions available for other plataforms.
 - [x] DotNet 6
-- [ ] Winodws 8
+- [ ] Windows 8
 - [ ] Windows Phone Silverlight 8
 - [ ] Windows Phone 8.1
 - [ ] Xamarin iOS
