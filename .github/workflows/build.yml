@@ -91,11 +91,11 @@ jobs:
             dotnet-version: 6.0.x
         - name: Create Nuget Package
           run: dotnet pack -c Release -o ./packages /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite/releases/tag/${{ github.event.release.tag_name }}"
-            working-directory: ./Proxfield.Extensions.Caching.SQLite
+          working-directory: ./Proxfield.Extensions.Caching.SQLite
         - name: Archive Nuget Package
           uses: actions/upload-artifact@v1
           with:
         - name: Proxfield.Extensions.Caching.SQLite
             path: ./packages/Proxfield.Extensions.Caching.SQLite.${{ github.event.release.tag_name }}.nupkg 
         - name: Publish Nuget Package
-            run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.nuget_api_key }} --source https://api.nuget.org/v3/index.json --no-symbols true
+          run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.nuget_api_key }} --source https://api.nuget.org/v3/index.json --no-symbols true
