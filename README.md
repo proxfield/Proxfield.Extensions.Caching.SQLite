@@ -61,6 +61,8 @@ var user = this.cache.GetAsObject<User>("users/1");
 |string GetAsString(string key);||
 |T? GetAsObject<T>(string key);||
 
+## Unit tests using Moq
+
 ## Platform Support
 SQLite Caching is compiled for DotNet 6, soon there will versions available for other plataforms.
 - [x] DotNet 6
