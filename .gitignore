@@ -5,6 +5,7 @@
 
 #
 [Ss]amples/
+/tests/coverage/*/
 # User-specific files
 *.rsuser
 *.suo

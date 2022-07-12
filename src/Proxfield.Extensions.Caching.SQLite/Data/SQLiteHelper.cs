@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
+using Microsoft.Data.Sqlite;
 using Proxfield.Extensions.Caching.SQLite.Constants;
 
 namespace Proxfield.Extensions.Caching.SQLite.Data
@@ -15,7 +15,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
             this.Initialize();
         }
 
-        public void Initialize()
+        public virtual void Initialize()
         {
             if (_sqliteConnection.State != System.Data.ConnectionState.Open)
             {
@@ -23,7 +23,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
             }
         }
 
-        public byte[] Get(string id)
+        public virtual byte[] Get(string id)
         {
             var command = _sqliteConnection.CreateCommand();
             command.CommandText = SQLCommands.SELECT_COMMAND;
@@ -39,12 +39,12 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
             return Array.Empty<byte>();
         }
 
-        public void CreateIfNotExists()
+        public virtual void CreateIfNotExists()
         {
             RunNonQueryCommand(SQLCommands.CREATE_TABLE_COMMAND);
         }
 
-        public bool Insert(string id, byte[] value)
+        public virtual bool Insert(string id, byte[] value)
         {
             return RunNonQueryCommand(new List<KeyValuePair<string, object>>()
                 {
@@ -54,9 +54,9 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
             KeyExists(id) ? SQLCommands.UPDATE_COMMAND : SQLCommands.INSERT_COMMAND) > 0;
         }
 
-        public bool KeyExists(string key) => Get(key) != Array.Empty<byte>();
+        public virtual bool KeyExists(string key) => Get(key) != Array.Empty<byte>();
 
-        public bool Delete(string id)
+        public virtual bool Delete(string id)
         {
             return RunNonQueryCommand(new List<KeyValuePair<string, object>>()
             {

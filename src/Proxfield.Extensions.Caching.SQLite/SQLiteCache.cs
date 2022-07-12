@@ -1,4 +1,4 @@
-﻿using Proxfield.Extensions.Caching.SQLite.Data;
+using Proxfield.Extensions.Caching.SQLite.Data;
 
 namespace Proxfield.Extensions.Caching.SQLite
 {
@@ -14,6 +14,14 @@ namespace Proxfield.Extensions.Caching.SQLite
             _helper = new SQLiteHelper(_options.Location!);
             _helper.CreateIfNotExists();
         }
+
+        public SQLiteCache(SQLiteHelper helper)
+        {
+            _options = new SQLiteCacheOptions();
+            _helper = helper;
+            _helper.CreateIfNotExists();
+        }
+
         //<inheritdoc />
         public byte[] Get(string key)
         {

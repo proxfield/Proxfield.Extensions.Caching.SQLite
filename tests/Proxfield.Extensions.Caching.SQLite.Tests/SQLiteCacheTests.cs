@@ -1,6 +1,7 @@
 using Moq;
 using Proxfield.Extensions.Caching.SQLite.Data;
 using System.Text;
+using Xunit;
 
 namespace Proxfield.Extensions.Caching.SQLite.Tests
 {
@@ -11,12 +12,12 @@ namespace Proxfield.Extensions.Caching.SQLite.Tests
         public SQLiteCacheTests()
         {
             var repository = new MockRepository(MockBehavior.Strict);
-            _mockSqliteHelper = repository.Create<SQLiteHelper>(MockBehavior.Loose);
+            
+            _mockSqliteHelper = repository.Create<SQLiteHelper>(string.Empty);
+            _mockSqliteHelper.Setup(x => x.Initialize()).Verifiable();
+            _mockSqliteHelper.Setup(x => x.CreateIfNotExists()).Verifiable();
 
-            _cache = new SQLiteCache(options => 
-            {
-                options.Location = @"c:\helper\data";
-            });
+            _cache = new SQLiteCache(_mockSqliteHelper.Object);
         }
 
         [Fact]
@@ -27,8 +28,6 @@ namespace Proxfield.Extensions.Caching.SQLite.Tests
             const string key = "d1";
             var contentBinary = Encoding.ASCII.GetBytes(content);
 
-            _mockSqliteHelper.Setup(x => x.CreateIfNotExists()).Verifiable();
-            _mockSqliteHelper.Setup(x => x.Initialize()).Verifiable();
             _mockSqliteHelper.Setup(x => x.Insert(key, contentBinary)).Returns(true).Verifiable();
 
             //Act
