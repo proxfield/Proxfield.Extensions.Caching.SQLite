@@ -7,7 +7,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
     <PackageId>Proxfield.Extensions.Caching.SQLite</PackageId>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <PackageTags>Proxfield.Extensions.Caching.SQLite;Proxfield.Extensions.Caching.SQLite.DependencyInjection</PackageTags>
     <Description>The SQLite Caching Library is layer for caching data on SQLite to be used as a secondary database in case of failures and network inconsistences.</Description>
   </PropertyGroup>
