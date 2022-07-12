@@ -49,14 +49,14 @@ jobs:
     if: github.ref == 'refs/heads/main' # only run job if on the main branch 
 
     steps:
-    - name: Code Coverage Summary Report
-      uses: irongut/CodeCoverageSummary@v1.2.0
-      with:
-        filename: coverage.cobertura.xml
     - name: Test
       run: dotnet test --collect:"XPlat Code Coverage" --results-directory:"./tests/coverage" Proxfield.Extensions.Caching.SQLite.sln --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
     - name: Copy Coverage To Predictable Location
       run: cp tests/coverage/**/coverage.cobertura.xml coverage.cobertura.xml
+    - name: Code Coverage Summary Report
+      uses: irongut/CodeCoverageSummary@v1.2.0
+      with:
+        filename: coverage.cobertura.xml
     - name: Code Coverage Summary Report
       uses: irongut/CodeCoverageSummary@v1.2.0
       with:
