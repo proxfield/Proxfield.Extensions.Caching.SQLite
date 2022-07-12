@@ -4,6 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+    <PackageId>Proxfield.Extensions.Caching.SQLite</PackageId>
+    <Version>0.1.0</Version>
+    <PackageTags>Proxfield.Extensions.Caching.SQLite;Proxfield.Extensions.Caching.SQLite.DependencyInjection</PackageTags>
+    <Description>The SQLite Caching Library is layer for caching data on SQLite to be used as a secondary database in case of failures and network inconsistences.</Description>
   </PropertyGroup>
 
   <ItemGroup>
