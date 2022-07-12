@@ -16,6 +16,7 @@ namespace Proxfield.Extensions.Caching.SQLite.DependencyInjection
         public static IServiceCollection AddSQLiteCache(this IServiceCollection services, Action<SQLiteCacheOptions> options)
         {
             services.AddScoped<ISQLiteCache, SQLiteCache>(c => new SQLiteCache(options));
+            services.AddScoped<Cacheable>();
             return services;
         }
     }

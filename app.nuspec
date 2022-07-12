@@ -9,9 +9,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Extension for using SQLite as a InDisk caching tool for failover cases.</description>
     <language>en-US</language>
-    <icon>icon.png</icon>
+    <icon>docs\images\logo.png</icon>
   </metadata>
   <files>
-    <file src="icon.png" target="" />
+    <file src="docs\images\logo.png" target="" />
   </files>
 </package>
