@@ -1,5 +1,8 @@
-﻿namespace Proxfield.Extensions.Caching.SQLite.Constants
+namespace Proxfield.Extensions.Caching.SQLite.Constants
 {
+    /// <summary>
+    ///  Constains the SQL commands for the database
+    /// </summary>
     public static class SQLCommands
     {
         private static readonly string TABLE_NAME = "TBL_SQLITE_CACHE";

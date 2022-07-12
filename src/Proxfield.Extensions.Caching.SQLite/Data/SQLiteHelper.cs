@@ -3,6 +3,9 @@ using Proxfield.Extensions.Caching.SQLite.Constants;
 
 namespace Proxfield.Extensions.Caching.SQLite.Data
 {
+    /// <summary>
+    /// SQLite Helper
+    /// </summary>
     public class SQLiteHelper : IDisposable
     {
         private readonly SqliteConnection _sqliteConnection;
@@ -14,7 +17,9 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
             SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
             this.Initialize();
         }
-
+        /// <summary>
+        /// Initializes the database 
+        /// </summary>
         public virtual void Initialize()
         {
             if (_sqliteConnection.State != System.Data.ConnectionState.Open)
@@ -22,7 +27,11 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
                 _sqliteConnection.Open();
             }
         }
-
+        /// <summary>
+        /// Get an specific data from the database based on its key
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public virtual byte[] Get(string id)
         {
             var command = _sqliteConnection.CreateCommand();
@@ -38,12 +47,19 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
 
             return Array.Empty<byte>();
         }
-
+        /// <summary>
+        /// Create databatse if it does not exists
+        /// </summary>
         public virtual void CreateIfNotExists()
         {
             RunNonQueryCommand(SQLCommands.CREATE_TABLE_COMMAND);
         }
-
+        /// <summary>
+        /// Inserts a data on the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public virtual bool Insert(string id, byte[] value)
         {
             return RunNonQueryCommand(new List<KeyValuePair<string, object>>()
@@ -53,9 +69,17 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
                 },
             KeyExists(id) ? SQLCommands.UPDATE_COMMAND : SQLCommands.INSERT_COMMAND) > 0;
         }
-
+        /// <summary>
+        /// Check if a specific key exists
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public virtual bool KeyExists(string key) => Get(key) != Array.Empty<byte>();
-
+        /// <summary>
+        /// Delete an item from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public virtual bool Delete(string id)
         {
             return RunNonQueryCommand(new List<KeyValuePair<string, object>>()
@@ -77,6 +101,9 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
             return command.ExecuteNonQuery();
         }
 
-        public void Dispose() => _sqliteConnection.Open();
+        public void Dispose()
+        {
+            _sqliteConnection.Dispose();
+        }
     }
 }
