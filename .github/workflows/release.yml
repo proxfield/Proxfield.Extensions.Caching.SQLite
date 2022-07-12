@@ -1,18 +1,19 @@
 name: "Deploy Nuget"
 on:
     push:
-        branches: [ "main" ]
+        branches: [ "main", "dev" ]
     pull_request:
         branches: [ "main" ]
 
 env:
- PROJECT_NAME: '${{PROJECT_NAME}}'
- PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
- NUGET_SOURCE_URL: 'https://api.nuget.org/v3/index.json'
+    PROJECT_NAME: Proxfield.Extensions.Caching.SQLite
+    PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/output
+    NUGET_SOURCE_URL: https://api.nuget.org/v3/index.json
+
 jobs:
  publish:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' # only run job if on the main branch 
+    #if: github.ref == 'refs/heads/main' # only run job if on the main branch 
 
     steps:
         - uses: actions/checkout@v2
@@ -29,14 +30,19 @@ jobs:
           run: dotnet build --configuration Release
         
         - name: Create Nuget Package
-          run: dotnet pack --configuration Release -output ${{ PACKAGE_OUTPUT_DIRECTORY }} /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/proxfield/${{PROJECT_NAME}}"
-          working-directory: ./${{PROJECT_NAME}}
+          run: dotnet pack --configuration Release --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }} --no-build --include-symbols --no-restore
         
+        - name: Getting project's version
+          uses: kzrnm/get-net-sdk-project-versions-action@v1
+          id: get-version
+          with:
+            proj-path: src/${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.csproj
+
         - name: Archive Nuget Package
           uses: actions/upload-artifact@v1
           with:
-            name: ${{PROJECT_NAME}}
-            path: ${{ PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg
+            name: ${{ env.PROJECT_NAME }}
+            path: ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/${{ env.PROJECT_NAME }}.${{ steps.get-version.outputs.version }}.nupkg
         
         - name: Publish Nuget Package
-          run: dotnet nuget push ${{ PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg --api-key ${{ secrets.nuget_api_key }} --source ${{ NUGET_SOURCE_URL }} --no-symbols true
+          run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg --api-key ${{ secrets.nuget_api_key }} --source ${{ env.NUGET_SOURCE_URL }} --no-symbols --skip-duplicate
