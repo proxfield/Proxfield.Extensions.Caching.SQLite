@@ -5,7 +5,7 @@
 
 #
 [Ss]amples/
-/tests/coverage/*/
+[Cc]overage/
 # User-specific files
 *.rsuser
 *.suo
