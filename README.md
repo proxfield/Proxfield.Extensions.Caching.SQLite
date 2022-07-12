@@ -48,6 +48,19 @@ this.cache.SetAsObject<User>("users/1", new User() { Name = "Jose" });
 var user = this.cache.GetAsObject<User>("users/1");
 ```
 
+| Method | Description |
+| ------ | ----------- |
+|byte[] Get(string key);| |
+|Task<byte[]> GetAsync(string key);||
+|void Set(string key, byte[] value);||
+|Task SetAsync(string key, byte[] value);||
+|void Remove(string key);||
+|Task RemoveAsync(string key);||
+|void SetAsString(string key, string value);||
+|void SetAsObject<T>(string key, T value);||
+|string GetAsString(string key);||
+|T? GetAsObject<T>(string key);||
+
 ## Platform Support
 SQLite Caching is compiled for DotNet 6, soon there will versions available for other plataforms.
 - [x] DotNet 6
