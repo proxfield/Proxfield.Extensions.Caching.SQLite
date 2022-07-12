@@ -38,11 +38,11 @@ jobs:
           with:
             proj-path: src/${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.csproj
 
-        # - name: Archive Nuget Package
-        #   uses: actions/upload-artifact@v1
-        #   with:
-        #     name: ${{ env.PROJECT_NAME }}
-        #     path: ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/${{ env.PROJECT_NAME }}.${{ steps.get-version.outputs.version }}.nupkg
+        - name: Archive Nuget Package
+          uses: actions/upload-artifact@v1
+          with:
+            name: ${{ env.PROJECT_NAME }}
+            path: ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/${{ env.PROJECT_NAME }}.${{ steps.get-version.outputs.version }}.nupkg
         
         - name: Publish Nuget Package
           run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg --api-key ${{ secrets.nuget_api_key }} --source ${{ env.NUGET_SOURCE_URL }} --no-symbols true
