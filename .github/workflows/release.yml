@@ -45,4 +45,4 @@ jobs:
             path: ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/${{ env.PROJECT_NAME }}.${{ steps.get-version.outputs.version }}.nupkg
         
         - name: Publish Nuget Package
-          run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg --api-key ${{ secrets.nuget_api_key }} --source ${{ env.NUGET_SOURCE_URL }} --no-symbols true
+          run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg --api-key ${{ secrets.nuget_api_key }} --source ${{ env.NUGET_SOURCE_URL }} --no-symbols --skip-duplicate
