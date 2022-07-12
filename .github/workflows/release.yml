@@ -11,7 +11,11 @@ jobs:
     runs-on: ubuntu-latest    
     needs: coverage
     if: github.ref == 'refs/heads/main'
+    
     steps:  
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0         
     #Push NuGet package to GitHub packages
     - name: Packing project
     run: dotnet pack -o ./packages
