@@ -30,14 +30,14 @@ jobs:
           run: dotnet build --configuration Release
         
         - name: Create Nuget Package
-          run: dotnet pack --configuration Release -output ${{ PACKAGE_OUTPUT_DIRECTORY }} /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/proxfield/${{PROJECT_NAME}}"
-          working-directory: ./${{PROJECT_NAME}}
+          run: dotnet pack --configuration Release -output ${{ env.PACKAGE_OUTPUT_DIRECTORY }} /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/proxfield/${{ env.PROJECT_NAME }}"
+          working-directory: ./${{ env.PROJECT_NAME }}
         
         - name: Archive Nuget Package
           uses: actions/upload-artifact@v1
           with:
-            name: ${{PROJECT_NAME}}
-            path: ${{ PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg
+            name: ${{ env.PROJECT_NAME }}
+            path: ${{ env.PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg
         
         - name: Publish Nuget Package
-          run: dotnet nuget push ${{ PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg --api-key ${{ secrets.nuget_api_key }} --source ${{ NUGET_SOURCE_URL }} --no-symbols true
+          run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg --api-key ${{ secrets.nuget_api_key }} --source ${{ env.NUGET_SOURCE_URL }} --no-symbols true
