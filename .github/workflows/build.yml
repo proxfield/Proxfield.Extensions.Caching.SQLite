@@ -45,6 +45,8 @@ jobs:
     if: github.ref == 'refs/heads/main' # only run job if on the main branch 
 
     steps:
+    - name: Building 
+      run: dotnet build --configuration Release
     - name: Test
       run: dotnet test Proxfield.Extensions.Caching.SQLite.sln --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
     - name: Copy Coverage To Predictable Location
