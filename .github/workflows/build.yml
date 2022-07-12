@@ -37,7 +37,7 @@ jobs:
     - name: Building 
       run: dotnet build --configuration Release
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --configuration Release --no-build --verbosity normal
 
   coverage:
     runs-on: ubuntu-latest    
