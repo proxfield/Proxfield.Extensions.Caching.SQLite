@@ -6,9 +6,10 @@ on:
         branches: [ "main" ]
 
 env:
- PROJECT_NAME: 'Proxfield.Extensions.Caching.SQLite'
- PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
- NUGET_SOURCE_URL: 'https://api.nuget.org/v3/index.json'
+    PROJECT_NAME: 'Proxfield.Extensions.Caching.SQLite'
+    PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
+    NUGET_SOURCE_URL: 'https://api.nuget.org/v3/index.json'
+
 jobs:
  publish:
     runs-on: ubuntu-latest
