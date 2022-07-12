@@ -30,7 +30,7 @@ jobs:
           run: dotnet build --configuration Release
         
         - name: Create Nuget Package
-          run: dotnet pack --configuration Release -output ${{ env.PACKAGE_OUTPUT_DIRECTORY }} /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/proxfield/${{ env.PROJECT_NAME }}"
+          run: dotnet pack --configuration Release --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }} /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/proxfield/${{ env.PROJECT_NAME }}"
           working-directory: ./${{ env.PROJECT_NAME }}
         
         - name: Archive Nuget Package
