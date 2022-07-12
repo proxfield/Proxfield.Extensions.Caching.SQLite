@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <version>1.0.0</version>
+    <authors>proxfield</authors>
+    <owners />
+    <id>Proxfield.Extensions.Caching.SQLite</id>
+    <title />
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Extension for using SQLite as a InDisk caching tool for failover cases.</description>
+    <language>en-US</language>
+    <icon>icon.png</icon>
+  </metadata>
+  <files>
+    <file src="icon.png" target="" />
+  </files>
+</package>
