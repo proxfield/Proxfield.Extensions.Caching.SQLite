@@ -1,9 +1,14 @@
-name: Nuget
-
+name: "Deploy Nuget"
 on:
-    release:
-        types: [published]
+    push:
+        branches: [ "main" ]
+    pull_request:
+        branches: [ "main" ]
 
+env:
+ PROJECT_NAME: '${{PROJECT_NAME}}'
+ PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
+ NUGET_SOURCE_URL: 'https://api.nuget.org/v3/index.json'
 jobs:
  publish:
     runs-on: ubuntu-latest
@@ -11,21 +16,27 @@ jobs:
 
     steps:
         - uses: actions/checkout@v2
+        
         - name: Setup .Net Core
           uses: actions/setup-dotnet@v1
           with:
             dotnet-version: 6.0.x
+        
         - name: Restoring Package
           run: dotnet restore 
+        
         - name: Building 
           run: dotnet build --configuration Release
+        
         - name: Create Nuget Package
-          run: dotnet pack -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite/releases/tag/${{ github.event.release.tag_name }}"
-          working-directory: ./Proxfield.Extensions.Caching.SQLite
+          run: dotnet pack --configuration Release -output ${{ PACKAGE_OUTPUT_DIRECTORY }} /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/proxfield/${{PROJECT_NAME}}"
+          working-directory: ./${{PROJECT_NAME}}
+        
         - name: Archive Nuget Package
           uses: actions/upload-artifact@v1
           with:
-            name: Proxfield.Extensions.Caching.SQLite
-            path: ./src/Proxfield.Extensions.Caching.SQLite.DependencyInjection/bin/Release/Proxfield.Extensions.Caching.SQLite.${{ github.event.release.tag_name }}.nupkg 
+            name: ${{PROJECT_NAME}}
+            path: ${{ PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg
+        
         - name: Publish Nuget Package
-          run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.nuget_api_key }} --source https://api.nuget.org/v3/index.json --no-symbols true
+          run: dotnet nuget push ${{ PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg --api-key ${{ secrets.nuget_api_key }} --source ${{ NUGET_SOURCE_URL }} --no-symbols true
