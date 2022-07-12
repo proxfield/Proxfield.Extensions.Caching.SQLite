@@ -13,7 +13,7 @@ env:
 jobs:
  publish:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' # only run job if on the main branch 
+    #if: github.ref == 'refs/heads/main' # only run job if on the main branch 
 
     steps:
         - uses: actions/checkout@v2
