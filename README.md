@@ -52,16 +52,16 @@ The following list constains all methods avaliable currently on the library.
 
 | Method | Description |
 | ------ | ----------- |
-|byte[] Get(string key);| |
-|Task<byte[]> GetAsync(string key);||
-|void Set(string key, byte[] value);||
-|Task SetAsync(string key, byte[] value);||
-|void Remove(string key);||
-|Task RemoveAsync(string key);||
-|void SetAsString(string key, string value);||
-|void SetAsObject<T>(string key, T value);||
-|string GetAsString(string key);||
-|T? GetAsObject<T>(string key);||
+|byte[] Get(string key);| Retrieves a cached resource from the database|
+|Task<byte[]> GetAsync(string key);| Retrieves a cached resource from the database as async|
+|void Set(string key, byte[] value);| Sets a cached resource to the database|
+|Task SetAsync(string key, byte[] value);|Sets a cached resource to the database async|
+|void Remove(string key);| Removes a cached resource to the database|
+|Task RemoveAsync(string key);| Removes a cached resource to the database as async|
+|void SetAsString(string key, string value);| Sets an string into the the database|
+|void SetAsObject<T>(string key, T value);| Sets an object into the the database|
+|string GetAsString(string key);| Retrieves a string from the database|
+|T? GetAsObject<T>(string key);| Retrieves an object from the database|
 
 ## Unit tests using Moq
 
