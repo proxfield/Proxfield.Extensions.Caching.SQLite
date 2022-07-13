@@ -1,6 +1,7 @@
 using Moq;
 using Proxfield.Extensions.Caching.SQLite.Data;
 using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Proxfield.Extensions.Caching.SQLite.Tests
@@ -35,6 +36,20 @@ namespace Proxfield.Extensions.Caching.SQLite.Tests
         }
 
         [Fact]
+        public async Task SetAsByteArrayAsync_ShouldNotThrownException()
+        {
+            //Arrange
+            const string content = "just a string";
+            const string key = "d1";
+            var contentBinary = Encoding.ASCII.GetBytes(content);
+            _mockSqliteHelper.Setup(x => x.Insert(key, contentBinary)).Returns(true).Verifiable();
+            //Act
+            var exception = await Record.ExceptionAsync(() => _cache.SetAsync(key, contentBinary));
+            //Assert
+            Assert.Null(exception);
+        }
+
+        [Fact]
         public void GetAsByteArray_DocumentExists_ShouldNotThrownException()
         {
             //Arrange
@@ -47,6 +62,18 @@ namespace Proxfield.Extensions.Caching.SQLite.Tests
             var exception = Record.Exception(() => _cache.Get(key));
             //Assert
             Assert.Null(exception);
+        }
+
+        [Fact]
+        public void GetAsByteArray_DocumentDoesNotExist_ShouldReturnByteArray()
+        {
+            //Arrange
+            const string content = "just a string";
+            const string key = "d1";
+            var contentBinary = Encoding.ASCII.GetBytes(content);
+            _mockSqliteHelper.Setup(x => x.Get(key)).Returns(contentBinary).Verifiable();
+            //Act & Assert
+            Assert.Equal(contentBinary, _cache.Get(key));
         }
 
         [Fact]
