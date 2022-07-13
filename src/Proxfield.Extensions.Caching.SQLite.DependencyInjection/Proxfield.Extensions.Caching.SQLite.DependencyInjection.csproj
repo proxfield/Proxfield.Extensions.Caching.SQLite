@@ -17,7 +17,7 @@
     <RepositoryType>git</RepositoryType>
     <Company>Proxfield</Company>
     <PackageProjectUrl>https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite</PackageProjectUrl>
-    <PackageLicenseFile>E:\Proxfield\Proxfield.Extensions.Caching.SQLite\LICENSE</PackageLicenseFile>
+    <PackageLicenseFile>E:\Proxfield\Proxfield.Extensions.Caching.SQLite\LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
