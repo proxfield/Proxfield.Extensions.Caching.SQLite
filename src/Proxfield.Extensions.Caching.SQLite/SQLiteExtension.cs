@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Text.Json;
 
 namespace Proxfield.Extensions.Caching.SQLite
@@ -11,7 +11,7 @@ namespace Proxfield.Extensions.Caching.SQLite
         /// <param name="cache"></param>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public static void SetAsString(this SQLiteCache cache, string key, string value)
+        public static void SetAsString(this ISQLiteCache cache, string key, string value)
         {
             cache.Set(key, Encoding.ASCII.GetBytes(value));
         }
@@ -22,7 +22,7 @@ namespace Proxfield.Extensions.Caching.SQLite
         /// <param name="cache"></param>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public static void SetAsObject<T>(this SQLiteCache cache, string key, T value)
+        public static void SetAsObject<T>(this ISQLiteCache cache, string key, T value)
         {
             cache.Set(key, Encoding.ASCII.GetBytes(JsonSerializer.Serialize(value)));
         }
@@ -32,7 +32,7 @@ namespace Proxfield.Extensions.Caching.SQLite
         /// <param name="cache"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static string GetAsString(this SQLiteCache cache, string key)
+        public static string GetAsString(this ISQLiteCache cache, string key)
         {
             return Encoding.UTF8.GetString(cache.Get(key));
         }
@@ -43,7 +43,7 @@ namespace Proxfield.Extensions.Caching.SQLite
         /// <param name="cache"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static T? GetAsObject<T>(this SQLiteCache cache, string key)
+        public static T? GetAsObject<T>(this ISQLiteCache cache, string key)
         {
             return JsonSerializer.Deserialize<T>(Encoding.UTF8.GetString(cache.Get(key)));
         }
