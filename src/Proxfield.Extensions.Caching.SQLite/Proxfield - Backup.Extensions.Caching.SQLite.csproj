@@ -6,15 +6,13 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-    <PackageIcon>images\logo.png</PackageIcon>
+    <PackageIcon>images\logo.png\logo.png</PackageIcon>
     <PackageIconUrl>https://proxfield.com/public/favicon.png</PackageIconUrl>
-    <PackageId>Proxfield.Extensions.Caching.SQLite.DependencyInjection</PackageId>
+    <PackageId>Proxfield.Extensions.Caching.SQLite</PackageId>
     <Version>0.2.5</Version>
     <PackageTags>Proxfield.Extensions.Caching.SQLite;Proxfield.Extensions.Caching.SQLite.DependencyInjection</PackageTags>
     <Description>The SQLite Caching Library is layer for caching data on SQLite to be used as a secondary database in case of failures and network inconsistences.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
     <ItemGroup>
@@ -24,13 +22,9 @@
           <PackagePath>\</PackagePath>
         </None>
     </ItemGroup>
-    
-    <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-  </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\Proxfield.Extensions.Caching.SQLite\Proxfield.Extensions.Caching.SQLite.csproj" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.6" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="6.0.7" />
   </ItemGroup>
 
 </Project>

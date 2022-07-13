@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{99916A22
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proxfield.Extensions.Caching.SQLite.Tests", "tests\Proxfield.Extensions.Caching.SQLite.Tests\Proxfield.Extensions.Caching.SQLite.Tests.csproj", "{8430DF5F-26F0-4FD5-A9D7-6D7E676C58C2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{37088B65-9C90-49AE-B7A3-46C808EF99E7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proxfield.Extensions.Caching.SQLite.Sample", "samples\Proxfield.Extensions.Caching.SQLite.Sample\Proxfield.Extensions.Caching.SQLite.Sample.csproj", "{9814C6B5-74DF-4852-881E-3274B9A6C37A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,10 @@ Global
 		{8430DF5F-26F0-4FD5-A9D7-6D7E676C58C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8430DF5F-26F0-4FD5-A9D7-6D7E676C58C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8430DF5F-26F0-4FD5-A9D7-6D7E676C58C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9814C6B5-74DF-4852-881E-3274B9A6C37A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9814C6B5-74DF-4852-881E-3274B9A6C37A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9814C6B5-74DF-4852-881E-3274B9A6C37A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9814C6B5-74DF-4852-881E-3274B9A6C37A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +47,7 @@ Global
 		{219DE49A-D835-4EA5-B008-A324EEDCDC95} = {FC7255DB-DF47-4795-B826-7A73CADF325E}
 		{AD0169E5-FBD2-4153-A2BC-409E39ADDF32} = {FC7255DB-DF47-4795-B826-7A73CADF325E}
 		{8430DF5F-26F0-4FD5-A9D7-6D7E676C58C2} = {99916A22-F627-4427-873B-A679856514CA}
+		{9814C6B5-74DF-4852-881E-3274B9A6C37A} = {37088B65-9C90-49AE-B7A3-46C808EF99E7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A964DF03-6A99-4D11-8AC9-6921F54B8DB9}
