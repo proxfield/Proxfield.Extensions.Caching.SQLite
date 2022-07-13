@@ -1,7 +1,7 @@
 name: "Deploy Nuget"
 on:
     push:
-        branches: [ "main" ]
+        branches: [ "main", "dev" ]
     pull_request:
         branches: [ "main" ]
 
@@ -29,9 +29,12 @@ jobs:
         - name: Building 
           run: dotnet build --configuration Release
         
-        - name: Create Nuget Package
-          run: dotnet pack --configuration Release --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }} --no-build --include-symbols --no-restore
+        - name: Create Nuget Package (Without DI)
+          run: dotnet pack src/${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.csproj --configuration Release --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }} --no-build --include-symbols --no-restore
         
+        - name: Create Nuget Package (With DI)
+          run: dotnet pack src/${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.DependencyInjection.csproj --configuration Release --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }} --no-build --include-symbols --no-restore
+
         - name: Getting project's version
           uses: kzrnm/get-net-sdk-project-versions-action@v1
           id: get-version
