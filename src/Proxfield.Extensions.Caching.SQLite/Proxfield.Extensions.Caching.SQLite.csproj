@@ -17,12 +17,16 @@
     <RepositoryUrl>https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Company>Proxfield Consultoria</Company>
-    <PackageLicenseFile>E:\Proxfield\Proxfield.Extensions.Caching.SQLite\LICENSE.txt</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
     <ItemGroup>
         <None Include="..\..\docs\images\logo.png" Pack="true" Visible="false" PackagePath="images\logo.png" />
+        <None Include="..\..\LICENSE.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
         <None Include="..\..\README.md">
           <Pack>True</Pack>
           <PackagePath>\</PackagePath>
