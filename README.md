@@ -36,6 +36,8 @@ services.AddSQLiteCache(options => {
 });
 ```
 
+When no location is providade the library will consider the running path followed by "db.sqlite" as a database location for the SQLite file.
+
 ## Methods available
 
 The caching can be recorded/retrieved as a simple string
@@ -68,11 +70,7 @@ The following list constains all methods avaliable currently on the library.
 ## Platform Support
 SQLite Caching is compiled for DotNet 6, soon there will versions available for other plataforms.
 - [x] DotNet 6
-- [ ] Windows 8
-- [ ] Windows Phone Silverlight 8
-- [ ] Windows Phone 8.1
-- [ ] Xamarin iOS
-- [ ] Xamarin Android
+- [ ] DotNet 5
 
 ## License
 The MIT License (MIT)
