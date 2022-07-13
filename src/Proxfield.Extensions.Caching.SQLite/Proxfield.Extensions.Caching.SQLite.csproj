@@ -9,13 +9,16 @@
     <PackageIcon>images\logo.png</PackageIcon>
     <PackageIconUrl>https://proxfield.com/public/favicon.png</PackageIconUrl>
     <PackageId>Proxfield.Extensions.Caching.SQLite</PackageId>
-    <Version>0.2.5</Version>
-    <PackageTags>Proxfield.Extensions.Caching.SQLite;Proxfield.Extensions.Caching.SQLite.DependencyInjection</PackageTags>
+    <Version>0.2.6</Version>
+    <PackageTags>Proxfield</PackageTags>
     <Description>The SQLite Caching Library is layer for caching data on SQLite to be used as a secondary database in case of failures and network inconsistences.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite</PackageProjectUrl>
     <RepositoryUrl>https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <Company>Proxfield Consultoria</Company>
+    <PackageLicenseFile>E:\Proxfield\Proxfield.Extensions.Caching.SQLite\LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
     <ItemGroup>
