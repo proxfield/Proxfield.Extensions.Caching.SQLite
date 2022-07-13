@@ -10,7 +10,7 @@ namespace Proxfield.Extensions.Caching.SQLite
             _cache = cache;
         }
 
-        public void Save() => _cache.SetAsObject(this.Key, this);
+        public void Save(string? key = null) => _cache.SetAsObject(key ?? this.Key, this);
 
         public void Delete(string key) => _cache.Remove(key);
 
