@@ -1,4 +1,4 @@
-﻿namespace Proxfield.Extensions.Caching.SQLite
+namespace Proxfield.Extensions.Caching.SQLite
 {
     /// <summary>
     /// Sqlite Cache Interface
