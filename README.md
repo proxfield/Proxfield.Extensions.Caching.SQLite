@@ -14,6 +14,7 @@ The SQLite Caching Library is layer for caching data on SQLite to be used as a s
 ```bash
 PM> Install-Package Proxfield.Extensions.Caching.SQLite
 ```
+Visit out project at the [Nuget Repository Page](https://www.nuget.org/packages/Proxfield.Extensions.Caching.SQLite) to know more.
 
 ## How
 This caching library is based on the "Microsoft.Extensions.Caching.Redis" for memory caching, but instead of using Redis it uses the SQLite as a data layer. The ideia is to be a library for persistence cache in case of failures. This library uses the "Microsoft.Data" and acts as a layer above the SQLite.
