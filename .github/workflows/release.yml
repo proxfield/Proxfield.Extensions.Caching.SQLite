@@ -33,7 +33,7 @@ jobs:
           run: dotnet pack src/${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.csproj --configuration Release --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }} --no-build --include-symbols --no-restore
         
         - name: Create Nuget Package (With DI)
-          run: dotnet pack src/${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.DependencyInjection.csproj --configuration Release --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }} --no-build --include-symbols --no-restore
+          run: dotnet pack src/${{ env.PROJECT_NAME }}.DependencyInjection/${{ env.PROJECT_NAME }}.DependencyInjection.csproj --configuration Release --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }} --no-build --include-symbols --no-restore
 
         - name: Getting project's version
           uses: kzrnm/get-net-sdk-project-versions-action@v1
