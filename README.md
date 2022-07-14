@@ -5,6 +5,7 @@
 ![GitHub branch checks state](https://img.shields.io/github/checks-status/proxfield/Proxfield.Extensions.Caching.SQLite/main)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/proxfield/Proxfield.Extensions.Caching.SQLite)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Proxfield.Extensions.Caching.SQLite.svg)](https://www.nuget.org/packages/Proxfield.Extensions.Caching.SQLite)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Proxfield.Extensions.Caching.SQLite.DependencyInjection.svg)](https://www.nuget.org/packages/Proxfield.Extensions.Caching.SQLite.DependencyInjection)
 
 # SQLite Caching Library
 
@@ -14,6 +15,11 @@ The SQLite Caching Library is layer for caching data on SQLite to be used as a s
 ```bash
 PM> Install-Package Proxfield.Extensions.Caching.SQLite
 ```
+For application who uses Microsoft.Extensions.DependencyInjection there is a package available for using the library with DI:
+```bash
+PM> Install-Package Proxfield.Extensions.Caching.SQLite.DependencyInjection
+```
+
 Visit out project at the [Nuget Repository Page](https://www.nuget.org/packages/Proxfield.Extensions.Caching.SQLite) to know more.
 
 ## How
