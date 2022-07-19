@@ -44,5 +44,22 @@ namespace Proxfield.Extensions.Caching.SQLite
         /// <param name="token"></param>
         /// <returns></returns>
         Task RemoveAsync(string key, CancellationToken token = default(CancellationToken));
+        /// <summary>
+        /// Get values from the cache when key starts with
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        Dictionary<string, byte[]> GetStartsWith(string key);
+        /// <summary>
+        /// Get values from the cache when key starts with asynchronous
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        Task<Dictionary<string, byte[]>> GetStartsWithAsync(string key, CancellationToken token = default);
+        /// <summary>
+        /// Clear all the cache from the database (not including indexers)
+        /// </summary>
+        void ClearCache();
     }
 }

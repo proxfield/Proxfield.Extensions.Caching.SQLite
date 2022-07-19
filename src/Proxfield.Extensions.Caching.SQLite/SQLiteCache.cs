@@ -1,4 +1,6 @@
 using Proxfield.Extensions.Caching.SQLite.Data;
+using Proxfield.Extensions.Caching.SQLite.Extensions;
+using Proxfield.Extensions.Caching.SQLite.Operations;
 using Proxfield.Extensions.Caching.SQLite.Utils;
 
 namespace Proxfield.Extensions.Caching.SQLite
@@ -6,57 +8,80 @@ namespace Proxfield.Extensions.Caching.SQLite
     public class SQLiteCache : IDisposable, ISQLiteCache
     { 
         private readonly SQLiteCacheOptions _options;
-        private readonly SQLiteHelper _helper;
+
+        private readonly DbCacheOperations _cacheOperations;
+        public SQLiteCacheAdvancedOperations Advanced { get; set; }
 
         public SQLiteCache(Action<SQLiteCacheOptions>? options = null)
         {
             _options = new SQLiteCacheOptions();
             options?.Invoke(_options);
-            _helper = new SQLiteHelper(_options.Location ?? PathUtils.ConvertToCurrentLocation("db.sqlite"));
-            _helper.CreateIfNotExists();
+            
+            _cacheOperations = new DbCacheOperations(_options.Location ?? PathUtils.ConvertToCurrentLocation("db.sqlite"));
+            Advanced = new SQLiteCacheAdvancedOperations(_cacheOperations);
         }
 
-        public SQLiteCache(SQLiteHelper helper)
+        public SQLiteCache(DbCacheOperations cacheOperations)
         {
             _options = new SQLiteCacheOptions();
-            _helper = helper;
-            _helper.CreateIfNotExists();
+            _cacheOperations = cacheOperations;
+            _cacheOperations.CreateIfNotExists();
+            Advanced = new SQLiteCacheAdvancedOperations(_cacheOperations);
         }
+
+        //<inheritdoc />
+        public void ClearCache() => _cacheOperations.Truncate();
 
         //<inheritdoc />
         public byte[] Get(string key)
         {
-            return _helper.Get(key);
+            return _cacheOperations.GetCache(key);
+        }
+
+        //<inheritdoc />
+        public Dictionary<string, byte[]> GetStartsWith(string key)
+        {
+            var keyWithoutSpecialChar = key.RemoveSpecialChars();
+            return _cacheOperations.GetStartsWithCache(keyWithoutSpecialChar);
         }
         //<inheritdoc />
         public Task<byte[]> GetAsync(string key, CancellationToken token = default)
         {
-            return Task.FromResult(_helper.Get(key));
+            return Task.FromResult(_cacheOperations.GetCache(key));
+        }
+
+        //<inheritdoc />
+        public Task<Dictionary<string, byte[]>> GetStartsWithAsync(string key, CancellationToken token = default)
+        {
+            return Task.FromResult(_cacheOperations.GetStartsWithCache(key));
         }
         //<inheritdoc />
         public void Remove(string key)
         {
-            _ = _helper.Delete(key);
+            _ = _cacheOperations.Delete(key);
         }
         //<inheritdoc />
         public Task RemoveAsync(string key, CancellationToken token = default)
         {
-            return Task.FromResult(_helper.Delete(key));
+            return Task.FromResult(_cacheOperations.Delete(key));
         }
         //<inheritdoc />
         public void Set(string key, byte[] value)
         {
-            _ = _helper.Insert(key, value);
+            if (key.EndsWith("|"))
+                key = Advanced.Generate(key);
+
+            _ = _cacheOperations.InsertCache(key, value);
         }
         //<inheritdoc />
         public Task SetAsync(string key, byte[] value, CancellationToken token = default)
         {
-           return Task.FromResult(_helper.Insert(key, value));
+           return Task.FromResult(_cacheOperations.InsertCache(key, value));
         }
         /// <summary>
         /// Dispose the connection
         /// </summary>
-        public void Dispose() => this._helper.Dispose();
+        public void Dispose() => this._cacheOperations.Dispose();
 
     }
 }

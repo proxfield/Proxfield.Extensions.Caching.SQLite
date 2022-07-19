@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 
 namespace Proxfield.Extensions.Caching.SQLite.Sample
 {
@@ -8,12 +9,23 @@ namespace Proxfield.Extensions.Caching.SQLite.Sample
         public static void Main(string[] args)
         {
             var cache = new SQLiteCache();
+            cache.ClearCache();
+            cache.Advanced.ClearAllIndexers();
 
-            const string name = "Jose";
-            const string key = "user/1";
+            var user = new User()
+            {
+                Name = "Jose"
+            };
+            const string key = "user|";
 
-            cache.SetAsString(key, name);
-            Console.WriteLine(cache.GetAsString(key));
+            cache.SetAsObject(key, user);
+            cache.SetAsObject(key, user);
+
+            var users = cache.GetAsObjectStartsWith<User>(key);
+            Console.WriteLine(JsonSerializer.Serialize(users));
+
+            var indexers = cache.Advanced.GetAllIndexes();
+            Console.WriteLine(JsonSerializer.Serialize(indexers));
         }
     }
 }
