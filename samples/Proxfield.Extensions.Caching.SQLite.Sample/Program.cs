@@ -10,21 +10,20 @@ namespace Proxfield.Extensions.Caching.SQLite.Sample
         {
             var cache = new SQLiteCache();
             cache.ClearCache();
-            cache.Advanced.ClearAllIndexers();
+            cache.Maintenance.ClearAllIndexers();
 
-            var user = new User()
-            {
-                Name = "Jose"
-            };
+            var user = new User(name: "Jose");
             const string key = "user|";
 
             cache.SetAsObject(key, user);
             cache.SetAsObject(key, user);
 
+            cache.SetAsObject("vehicles|", new { Name = "bycicle" }) ;
+
             var users = cache.GetAsObjectStartsWith<User>(key);
             Console.WriteLine(JsonSerializer.Serialize(users));
 
-            var indexers = cache.Advanced.GetAllIndexes();
+            var indexers = cache.Maintenance.GetAllIndexes();
             Console.WriteLine(JsonSerializer.Serialize(indexers));
         }
     }

@@ -1,3 +1,4 @@
+using Proxfield.Extensions.Caching.SQLite.Sql.Models;
 using Proxfield.Extensions.Caching.SQLite.Sql.Schema;
 
 namespace Proxfield.Extensions.Caching.SQLite.Data
@@ -22,43 +23,25 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
         /// <returns></returns>
         public virtual byte[] GetCache(string id)
         {
-            var command = GetConnection().CreateCommand();
-            command.CommandText = SqlCacheCommands.SELECT_CACHE_COMMAND;
-            command.Parameters.AddWithValue("$id", id);
-            using (var reader = command.ExecuteReader())
+            return base.RunQueryCommand<SQLiteCacheEntity>(new List<KeyValuePair<string, object>>()
             {
-                while (reader.Read())
-                {
-                    return (byte[])reader["VALUE"];
-                }
-            }
-
-            return Array.Empty<byte>();
+                new KeyValuePair<string, object>("id", id)
+            }, SqlCacheCommands.SELECT_CACHE_COMMAND)?
+                .FirstOrDefault()?
+                .Value ?? Array.Empty<byte>();
         }
-        public virtual Dictionary<string, byte[]> GetStartsWithCache(string id)
+        public virtual List<SQLiteCacheEntity> GetStartsWithCache(string id)
         {
-            var command = GetConnection().CreateCommand();
-            command.CommandText = SqlCacheCommands.SELECT_STARTS_WITH_CACHE_COMMAND.Replace("$id", id);
-
-            var items = new Dictionary<string, byte[]>();
-
-            using (var reader = command.ExecuteReader())
+            return base.RunQueryLikeCommand<SQLiteCacheEntity>(new List<KeyValuePair<string, object>>()
             {
-                while (reader.Read())
-                {
-                    items.Add((string)reader["KEY_ID"], (byte[])reader["VALUE"]);
-                }
-            }
-
-            return items;
+                new KeyValuePair<string, object>("id", id)
+            }, SqlCacheCommands.SELECT_STARTS_WITH_CACHE_COMMAND);
         }
         /// <summary>
         /// Create databatse if it does not exists
         /// </summary>
-        public virtual void CreateIfNotExists()
-        {
+        public virtual void CreateIfNotExists() => 
             RunNonQueryCommand(SqlCacheCommands.CREATE_CACHE_TABLE_COMMAND);
-        }
         /// <summary>
         /// Inserts a data on the database
         /// </summary>

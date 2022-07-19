@@ -1,32 +1,26 @@
 using Proxfield.Extensions.Caching.SQLite.Data;
 using Proxfield.Extensions.Caching.SQLite.Extensions;
-using Proxfield.Extensions.Caching.SQLite.Operations;
+using Proxfield.Extensions.Caching.SQLite.Sql.Models;
 using Proxfield.Extensions.Caching.SQLite.Utils;
 
 namespace Proxfield.Extensions.Caching.SQLite
 {
+    /// <summary>
+    /// SQLite Caching 
+    /// </summary>
     public class SQLiteCache : IDisposable, ISQLiteCache
     { 
         private readonly SQLiteCacheOptions _options;
-
         private readonly DbCacheOperations _cacheOperations;
-        public SQLiteCacheAdvancedOperations Advanced { get; set; }
-
+        public Maintenance Maintenance { get; set; }
         public SQLiteCache(Action<SQLiteCacheOptions>? options = null)
         {
             _options = new SQLiteCacheOptions();
             options?.Invoke(_options);
-            
-            _cacheOperations = new DbCacheOperations(_options.Location ?? PathUtils.ConvertToCurrentLocation("db.sqlite"));
-            Advanced = new SQLiteCacheAdvancedOperations(_cacheOperations);
-        }
+            _options.Location ??= PathUtils.ConvertToCurrentLocation("db.sqlite");
 
-        public SQLiteCache(DbCacheOperations cacheOperations)
-        {
-            _options = new SQLiteCacheOptions();
-            _cacheOperations = cacheOperations;
-            _cacheOperations.CreateIfNotExists();
-            Advanced = new SQLiteCacheAdvancedOperations(_cacheOperations);
+            _cacheOperations = new DbCacheOperations(_options.Location);
+            this.Maintenance = new Maintenance(_options);
         }
 
         //<inheritdoc />
@@ -39,10 +33,9 @@ namespace Proxfield.Extensions.Caching.SQLite
         }
 
         //<inheritdoc />
-        public Dictionary<string, byte[]> GetStartsWith(string key)
+        public List<SQLiteCacheEntity> GetStartsWith(string key)
         {
-            var keyWithoutSpecialChar = key.RemoveSpecialChars();
-            return _cacheOperations.GetStartsWithCache(keyWithoutSpecialChar);
+            return _cacheOperations.GetStartsWithCache(key.RemoveSpecialChars());
         }
         //<inheritdoc />
         public Task<byte[]> GetAsync(string key, CancellationToken token = default)
@@ -51,7 +44,7 @@ namespace Proxfield.Extensions.Caching.SQLite
         }
 
         //<inheritdoc />
-        public Task<Dictionary<string, byte[]>> GetStartsWithAsync(string key, CancellationToken token = default)
+        public Task<List<SQLiteCacheEntity>> GetStartsWithAsync(string key, CancellationToken token = default)
         {
             return Task.FromResult(_cacheOperations.GetStartsWithCache(key));
         }
@@ -69,7 +62,7 @@ namespace Proxfield.Extensions.Caching.SQLite
         public void Set(string key, byte[] value)
         {
             if (key.EndsWith("|"))
-                key = Advanced.Generate(key);
+                key = Maintenance.Generate(key);
 
             _ = _cacheOperations.InsertCache(key, value);
         }
@@ -82,6 +75,5 @@ namespace Proxfield.Extensions.Caching.SQLite
         /// Dispose the connection
         /// </summary>
         public void Dispose() => this._cacheOperations.Dispose();
-
     }
 }

@@ -1,4 +1,7 @@
 using Microsoft.Data.Sqlite;
+using Proxfield.Extensions.Caching.SQLite.Extensions;
+using Proxfield.Extensions.Caching.SQLite.Sql.Models;
+using System.Text;
 
 namespace Proxfield.Extensions.Caching.SQLite.Data
 {
@@ -16,6 +19,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
             SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
             this.Initialize();
         }
+
         /// <summary>
         /// Initializes the database 
         /// </summary>
@@ -41,23 +45,63 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        protected int RunNonQueryCommand(string sql)
-        {
-            return RunNonQueryCommand(new List<KeyValuePair<string, object>>(), sql);
-        }
+        protected int RunNonQueryCommand(string sql) => 
+            RunNonQueryCommand(new List<KeyValuePair<string, object>>(), sql);
+
         /// <summary>
         ///  Runs a command based on SQL and KeyParValue
         /// </summary>
-        /// <param name="items"></param>
+        /// <param name="where"></param>
         /// <param name="sql"></param>
         /// <returns></returns>
-        protected int RunNonQueryCommand(List<KeyValuePair<string, object>> items, string sql)
+        protected int RunNonQueryCommand(List<KeyValuePair<string, object>> where, string sql)
         {
             var command = _sqliteConnection.CreateCommand();
             command.CommandText = sql;
-            items.ForEach(p => command.Parameters.AddWithValue($"${p.Key}", p.Value));
+            where.ForEach(p => command.Parameters.AddWithValue($"${p.Key}", p.Value));
             return command.ExecuteNonQuery();
         }
+
+        protected List<T> RunQueryLikeCommand<T>(List<KeyValuePair<string, object>> where, string sql)
+        {
+            where.ForEach(p => sql = sql.Replace($"${p.Key}", p.Value?.ToString().RemoveSpecialChars()));
+            return RunQueryCommand<T>(new List<KeyValuePair<string, object>>(), sql);
+        }
+        /// <summary>
+        /// Runs a command based on SQL and KeyParValue and return a list of objects
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="where"></param>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        protected List<T> RunQueryCommand<T>(List<KeyValuePair<string, object>> where, string sql)
+        {
+            var command = _sqliteConnection.CreateCommand();
+            command.CommandText = sql;
+            where.ForEach(p => command.Parameters.AddWithValue($"${p.Key}", p.Value));
+
+            var items = new List<T>();
+
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                   var instance = Activator.CreateInstance<T>();
+                    instance?
+                        .GetType()
+                        .GetProperties()
+                        .ToList()
+                        .ForEach(p =>
+                        {
+                            p.SetValue(instance, Convert.ChangeType(reader[p.Name], p.PropertyType), null);
+                        });
+                    if(instance != null) items.Add(instance);
+                }
+            }
+
+            return items;
+        }
+
         /// <summary>
         /// Disposes the connection
         /// </summary>

@@ -1,3 +1,5 @@
+using Proxfield.Extensions.Caching.SQLite.Sql.Models;
+
 namespace Proxfield.Extensions.Caching.SQLite
 {
     /// <summary>
@@ -49,14 +51,14 @@ namespace Proxfield.Extensions.Caching.SQLite
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        Dictionary<string, byte[]> GetStartsWith(string key);
+        List<SQLiteCacheEntity> GetStartsWith(string key);
         /// <summary>
         /// Get values from the cache when key starts with asynchronous
         /// </summary>
         /// <param name="key"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        Task<Dictionary<string, byte[]>> GetStartsWithAsync(string key, CancellationToken token = default);
+        Task<List<SQLiteCacheEntity>> GetStartsWithAsync(string key, CancellationToken token = default);
         /// <summary>
         /// Clear all the cache from the database (not including indexers)
         /// </summary>

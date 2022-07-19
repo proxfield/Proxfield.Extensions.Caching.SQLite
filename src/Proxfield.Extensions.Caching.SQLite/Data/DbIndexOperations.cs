@@ -1,3 +1,4 @@
+using Proxfield.Extensions.Caching.SQLite.Sql.Models;
 using Proxfield.Extensions.Caching.SQLite.Sql.Schema;
 
 namespace Proxfield.Extensions.Caching.SQLite.Data
@@ -17,24 +18,14 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
             RunNonQueryCommand(SqlIndexCommands.CREATE_TABLE_COMMAND);
         }
 
-        public virtual Dictionary<string, long> GetAllIndexes() => GetIndexes();
-        public virtual Dictionary<string, long> GetIndexes(string? name = null)
+        public virtual List<SQLiteCacheIndex> GetAllIndexes() => GetIndexes();
+        public virtual SQLiteCacheIndex? GetIndex(string name) => GetIndexes(name).FirstOrDefault();
+        public virtual List<SQLiteCacheIndex> GetIndexes(string? name = null)
         {
-            var command = GetConnection().CreateCommand();
-            command.CommandText = name == null ? SqlIndexCommands.SELECT_ALL_INDEXES_COMMAND : SqlIndexCommands.SELECT_COMMAND;
-            
-            if(name != null) command.Parameters.AddWithValue("$name", name);
-            var indexes = new Dictionary<string, long>();
-
-            using (var reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    indexes.Add((string)reader["name"], (long)reader["seq_index"]);
-                }
-            }
-
-            return indexes;
+            var sql = name == null ? SqlIndexCommands.SELECT_ALL_INDEXES_COMMAND : SqlIndexCommands.SELECT_COMMAND;
+            var where = new List<KeyValuePair<string, object>>();
+            if(name != null) where.Add(new KeyValuePair<string, object>("name", name));
+            return RunQueryCommand<SQLiteCacheIndex>(where, sql);            
         }
 
         public void ResetIndex(string name, long? index)
@@ -54,7 +45,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
         public string Next(string key)
         {
             var kpIndex = GetIndex(key);
-            var next = kpIndex.Value+1;
+            var next = (kpIndex?.Sequence ?? 0)+1;
             UpdateIndex(key, next);
             return $"{key}/{next}";
         }
@@ -69,7 +60,6 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
                SqlIndexCommands.UPDATE_COMMAND) > 0;
         }
 
-        public virtual KeyValuePair<string, long> GetIndex(string name) => GetIndexes(name).FirstOrDefault();
         public bool CreateIndex(string name, int index = 0)
         {
             return RunNonQueryCommand(new List<KeyValuePair<string, object>>()
