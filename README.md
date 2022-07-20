@@ -4,7 +4,7 @@
 [![Nuget](https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite/actions/workflows/release.yml/badge.svg)](https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite/actions/workflows/release.yml)
 ![GitHub branch checks state](https://img.shields.io/github/checks-status/proxfield/Proxfield.Extensions.Caching.SQLite/main)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/proxfield/Proxfield.Extensions.Caching.SQLite)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/Brokenegg.DotIni.svg)](https://www.nuget.org/packages/Proxfield.Extensions.Caching.SQLite)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Proxfield.Extensions.Caching.SQLite.svg)](https://www.nuget.org/packages/Proxfield.Extensions.Caching.SQLite)
 
 # SQLite Caching Library
 
@@ -36,7 +36,7 @@ services.AddSQLiteCache(options => {
 });
 ```
 
-## Methods available
+## Cache Methods available
 
 The caching can be recorded/retrieved as a simple string
 ```csharp
@@ -62,8 +62,11 @@ The following list constains all methods avaliable currently on the library.
 |void SetAsObject<T>(string key, T value);| Sets an object into the the database|
 |string GetAsString(string key);| Retrieves a string from the database|
 |T? GetAsObject<T>(string key);| Retrieves an object from the database|
+|List\<T\> GetAsObjectStartsWith<T>(this ISQLiteCache cache, string key)| Get a list of objects when the key starts with something |
+|List\<string\> GetAsStringStartsWith(this ISQLiteCache cache, string key)| Get a list of strings when the key starts with something |
 
-## Unit tests using Moq
+## Indexes
+
 
 ## Platform Support
 SQLite Caching is compiled for DotNet 6, soon there will versions available for other plataforms.
