@@ -3,6 +3,9 @@ using Proxfield.Extensions.Caching.SQLite.Sql.Schema;
 
 namespace Proxfield.Extensions.Caching.SQLite.Data
 {
+    /// <summary>
+    /// Database cache operations
+    /// </summary>
     public class DbCacheOperations : DbOperations
     {
         public DbCacheOperations(string location) : base(location)
@@ -10,7 +13,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
             CreateIfNotExists();
         }
         /// <summary>
-        /// 
+        /// Clear all the items on the cache database
         /// </summary>
         public void Truncate()
         {

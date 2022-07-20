@@ -1,21 +1,19 @@
 using Microsoft.Data.Sqlite;
 using Proxfield.Extensions.Caching.SQLite.Extensions;
-using Proxfield.Extensions.Caching.SQLite.Sql.Models;
-using System.Text;
 
 namespace Proxfield.Extensions.Caching.SQLite.Data
 {
     /// <summary>
-    /// SQLite Helper
+    /// Database Operations
     /// </summary>
     public class DbOperations : IDisposable
     {
         private readonly SqliteConnection _sqliteConnection;
         private readonly string _location;
-        public DbOperations(string location)
+        public DbOperations(string location, SqliteConnection? connection = null)
         {
             _location = location;
-            _sqliteConnection = new SqliteConnection($"Data Source={_location};");
+            _sqliteConnection = connection ?? new SqliteConnection($"Data Source={_location};");
             SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
             this.Initialize();
         }
@@ -61,7 +59,13 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
             where.ForEach(p => command.Parameters.AddWithValue($"${p.Key}", p.Value));
             return command.ExecuteNonQuery();
         }
-
+        /// <summary>
+        /// Runs a query by using replace instead of parameter value
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="where"></param>
+        /// <param name="sql"></param>
+        /// <returns></returns>
         protected List<T> RunQueryLikeCommand<T>(List<KeyValuePair<string, object>> where, string sql)
         {
             where.ForEach(p => sql = sql.Replace($"${p.Key}", p.Value?.ToString().RemoveSpecialChars()));

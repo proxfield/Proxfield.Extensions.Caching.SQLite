@@ -23,6 +23,15 @@ namespace Proxfield.Extensions.Caching.SQLite
             this.Maintenance = new Maintenance(_options);
         }
 
+        public SQLiteCache(SQLiteCacheOptions options, 
+            DbCacheOperations cacheOperations,
+            Maintenance maintenance)
+        {
+            _cacheOperations = cacheOperations;
+            _options = options;
+            Maintenance = maintenance;
+        }
+
         //<inheritdoc />
         public void ClearCache() => _cacheOperations.Truncate();
 

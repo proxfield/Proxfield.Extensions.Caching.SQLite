@@ -8,17 +8,23 @@ namespace Proxfield.Extensions.Caching.SQLite.Tests
 {
     public class SQLiteCacheTests
     {
-        private readonly Mock<DbCacheOperations> _mockSqliteHelper;
+        private readonly Mock<DbCacheOperations> _mockDbCache;
+        private readonly Mock<Maintenance> _mockMaintenance;
+        private readonly Mock<SQLiteCacheOptions> _mockOptions;
+
         private readonly SQLiteCache _cache;
         public SQLiteCacheTests()
         {
             var repository = new MockRepository(MockBehavior.Strict);
             
-            _mockSqliteHelper = repository.Create<DbCacheOperations>(string.Empty);
-            _mockSqliteHelper.Setup(x => x.Initialize()).Verifiable();
-            _mockSqliteHelper.Setup(x => x.CreateIfNotExists()).Verifiable();
+            _mockOptions = repository.Create<SQLiteCacheOptions>();
+            _mockDbCache = repository.Create<DbCacheOperations>(_mockOptions.Object.Location);
+            _mockMaintenance = repository.Create<Maintenance>(_mockOptions.Object);
 
-            _cache = new SQLiteCache(_mockSqliteHelper.Object);
+            _mockDbCache.Setup(x => x.Initialize()).Verifiable();
+            _mockDbCache.Setup(x => x.CreateIfNotExists()).Verifiable();
+
+            _cache = new SQLiteCache(_mockOptions.Object, _mockDbCache.Object,_mockMaintenance.Object);
         }
 
         [Fact]
@@ -28,7 +34,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Tests
             const string content = "just a string";
             const string key = "d1";
             var contentBinary = Encoding.ASCII.GetBytes(content);
-            _mockSqliteHelper.Setup(x => x.InsertCache(key, contentBinary)).Returns(true).Verifiable();
+            _mockDbCache.Setup(x => x.InsertCache(key, contentBinary)).Returns(true).Verifiable();
             //Act
             var exception = Record.Exception(() => _cache.Set(key, contentBinary));
             //Assert
@@ -42,7 +48,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Tests
             const string content = "just a string";
             const string key = "d1";
             var contentBinary = Encoding.ASCII.GetBytes(content);
-            _mockSqliteHelper.Setup(x => x.InsertCache(key, contentBinary)).Returns(true).Verifiable();
+            _mockDbCache.Setup(x => x.InsertCache(key, contentBinary)).Returns(true).Verifiable();
             //Act
             var exception = await Record.ExceptionAsync(() => _cache.SetAsync(key, contentBinary));
             //Assert
@@ -57,7 +63,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Tests
             const string key = "d1";
             var contentBinary = Encoding.ASCII.GetBytes(content);
 
-            _mockSqliteHelper.Setup(x => x.GetCache(key)).Returns(contentBinary).Verifiable();
+            _mockDbCache.Setup(x => x.GetCache(key)).Returns(contentBinary).Verifiable();
             //Act
             var exception = Record.Exception(() => _cache.Get(key));
             //Assert
@@ -71,7 +77,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Tests
             const string content = "just a string";
             const string key = "d1";
             var contentBinary = Encoding.ASCII.GetBytes(content);
-            _mockSqliteHelper.Setup(x => x.GetCache(key)).Returns(contentBinary).Verifiable();
+            _mockDbCache.Setup(x => x.GetCache(key)).Returns(contentBinary).Verifiable();
             //Act & Assert
             Assert.Equal(contentBinary, _cache.Get(key));
         }
@@ -81,7 +87,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Tests
         {
             //Arrange
             const string key = "d1";
-            _mockSqliteHelper.Setup(x => x.GetCache(key)).Throws(new System.Exception("Could not found the document by key")).Verifiable();
+            _mockDbCache.Setup(x => x.GetCache(key)).Throws(new System.Exception("Could not found the document by key")).Verifiable();
             //Act
             var exception = Record.Exception(() => _cache.Get(key));
             //Assert
@@ -93,7 +99,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Tests
         {
             //Arrange
             const string key = "d1";
-            _mockSqliteHelper.Setup(x => x.Delete(key)).Returns(true).Verifiable();
+            _mockDbCache.Setup(x => x.Delete(key)).Returns(true).Verifiable();
             //Act
             var exception = Record.Exception(() => _cache.Remove(key));
             //Assert
@@ -105,7 +111,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Tests
         {
             //Arrange
             const string key = "d1";
-            _mockSqliteHelper.Setup(x => x.Delete(key)).Throws(new System.Exception("Could not found the document by key")).Verifiable();
+            _mockDbCache.Setup(x => x.Delete(key)).Throws(new System.Exception("Could not found the document by key")).Verifiable();
             //Act
             var exception = Record.Exception(() => _cache.Remove(key));
             //Assert
