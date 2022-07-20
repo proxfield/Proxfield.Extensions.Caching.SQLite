@@ -14,6 +14,11 @@ The SQLite Caching Library is layer for caching data on SQLite to be used as a s
 ```bash
 PM> Install-Package Proxfield.Extensions.Caching.SQLite
 ```
+For application who uses Microsoft.Extensions.DependencyInjection there is a package available for using the library with DI:
+```bash
+PM> Install-Package Proxfield.Extensions.Caching.SQLite.DependencyInjection
+```
+
 Visit out project at the [Nuget Repository Page](https://www.nuget.org/packages/Proxfield.Extensions.Caching.SQLite) to know more.
 
 ## How
@@ -35,6 +40,7 @@ services.AddSQLiteCache(options => {
     options.Location = @"c:\cache\database.sqlite";
 });
 ```
+
 
 ## Cache Methods available
 
@@ -90,7 +96,7 @@ The following list constains all indexing methods avaliable currently on the lib
 SQLite Caching is compiled for DotNet 6, soon there will versions available for other plataforms.
 - [x] DotNet 6
 - [ ] DotNet 5
-    
+
 ## License
 The MIT License (MIT)
 
