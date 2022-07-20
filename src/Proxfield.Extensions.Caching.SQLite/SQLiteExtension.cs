@@ -1,6 +1,4 @@
 using Proxfield.Extensions.Caching.SQLite.Serialization;
-using System.Text;
-using System.Text.Json;
 
 namespace Proxfield.Extensions.Caching.SQLite
 {
@@ -78,7 +76,7 @@ namespace Proxfield.Extensions.Caching.SQLite
                 .ToList();
         }
         /// <summary>
-        /// 
+        /// Get a list of strings when the key starts with something
         /// </summary>
         /// <param name="cache"></param>
         /// <param name="key"></param>
