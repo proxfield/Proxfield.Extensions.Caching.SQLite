@@ -33,6 +33,11 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
                 .FirstOrDefault()?
                 .Value ?? Array.Empty<byte>();
         }
+        /// <summary>
+        /// Get an specific data from the database based on its key (starting with some word)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public virtual List<SQLiteCacheEntity> GetStartsWithCache(string id)
         {
             return base.RunQueryLikeCommand<SQLiteCacheEntity>(new List<KeyValuePair<string, object>>()
