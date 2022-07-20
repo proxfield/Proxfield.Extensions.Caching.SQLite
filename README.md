@@ -4,7 +4,7 @@
 [![Nuget](https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite/actions/workflows/release.yml/badge.svg)](https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite/actions/workflows/release.yml)
 ![GitHub branch checks state](https://img.shields.io/github/checks-status/proxfield/Proxfield.Extensions.Caching.SQLite/main)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/proxfield/Proxfield.Extensions.Caching.SQLite)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/Brokenegg.DotIni.svg)](https://www.nuget.org/packages/Proxfield.Extensions.Caching.SQLite)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Proxfield.Extensions.Caching.SQLite.svg)](https://www.nuget.org/packages/Proxfield.Extensions.Caching.SQLite)
 
 # SQLite Caching Library
 
@@ -14,6 +14,11 @@ The SQLite Caching Library is layer for caching data on SQLite to be used as a s
 ```bash
 PM> Install-Package Proxfield.Extensions.Caching.SQLite
 ```
+For application who uses Microsoft.Extensions.DependencyInjection there is a package available for using the library with DI:
+```bash
+PM> Install-Package Proxfield.Extensions.Caching.SQLite.DependencyInjection
+```
+
 Visit out project at the [Nuget Repository Page](https://www.nuget.org/packages/Proxfield.Extensions.Caching.SQLite) to know more.
 
 ## How
@@ -36,7 +41,8 @@ services.AddSQLiteCache(options => {
 });
 ```
 
-## Methods available
+
+## Cache Methods available
 
 The caching can be recorded/retrieved as a simple string
 ```csharp
@@ -48,7 +54,7 @@ Or either as a complex object:
 this.cache.SetAsObject<User>("users/1", new User() { Name = "Jose" });
 var user = this.cache.GetAsObject<User>("users/1");
 ```
-The following list constains all methods avaliable currently on the library.
+The following list constains all caching methods avaliable currently on the library.
 
 | Method | Description |
 | ------ | ----------- |
@@ -62,17 +68,34 @@ The following list constains all methods avaliable currently on the library.
 |void SetAsObject<T>(string key, T value);| Sets an object into the the database|
 |string GetAsString(string key);| Retrieves a string from the database|
 |T? GetAsObject<T>(string key);| Retrieves an object from the database|
+|List\<T\> GetAsObjectStartsWith<T>(this ISQLiteCache cache, string key)| Get a list of objects when the key starts with something |
+|List\<string\> GetAsStringStartsWith(this ISQLiteCache cache, string key)| Get a list of strings when the key starts with something |
 
-## Unit tests using Moq
+## Collections and Indexes
+It is now possible to cache objects/strings by using an index, for example, the following code on a newly created database would save the object with the key as being <strong>vehicles/1</strong>.
+
+ ```csharp
+  cache.SetAsObject("vehicles|", new { Name = "bycicle" }) ;
+ ```
+Making possible to query more than one object at once, every document on a collection.
+    
+```csharp
+cache.GetAsObjectStartsWith<Vehicle>("vehicles");
+ ```
+
+The following list constains all indexing methods avaliable currently on the library. They can be acessed by the Maintenance property of cache (<strong>cache.Maintenance.</strong>)
+    
+| Method | Description |
+| ------ | ----------- |
+|List\<SQLiteCacheIndex\> GetAllIndexes()|Returns all indexes on the database|
+|SQLiteCacheIndex? GetIndex(string name|Returns an index from the database|
+|void ClearAllIndexers()|Purge all indexes from the database|
+|void ResetIndex(string name, long? value = null) |Reset an index to an specific value|
 
 ## Platform Support
 SQLite Caching is compiled for DotNet 6, soon there will versions available for other plataforms.
 - [x] DotNet 6
-- [ ] Windows 8
-- [ ] Windows Phone Silverlight 8
-- [ ] Windows Phone 8.1
-- [ ] Xamarin iOS
-- [ ] Xamarin Android
+- [ ] DotNet 5
 
 ## License
 The MIT License (MIT)
