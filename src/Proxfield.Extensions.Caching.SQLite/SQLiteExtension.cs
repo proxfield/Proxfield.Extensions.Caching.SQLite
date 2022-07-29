@@ -63,12 +63,12 @@ namespace Proxfield.Extensions.Caching.SQLite
         /// <param name="cache"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static List<T>? GetAsObjectStartsWith<T>(this ISQLiteCache cache, string key) where T : Cacheable
+        public static List<T>? GetAsObjectStartsWith<T>(this ISQLiteCache cache, string key, int start = 0, int pageSize = int.MaxValue) where T : Cacheable
         {
-           return cache.GetStartsWith(key)
+           return cache.GetStartsWith(key, start, pageSize)
                 .Select(p =>
                 {
-                    var obj = BynaryContentSerializer.ObjectFromBytes<T>(p.Value);
+                    var obj = BynaryContentSerializer.ObjectFromBytes<T>(p?.Value);
                     if (obj == null) obj = default;
                     obj!.Key = p.Key;
                     return obj;
@@ -80,11 +80,13 @@ namespace Proxfield.Extensions.Caching.SQLite
         /// </summary>
         /// <param name="cache"></param>
         /// <param name="key"></param>
+        /// <param name="start"></param>
+        /// <param name="pageSize"></param>
         /// <returns></returns>
-        public static List<string>? GetAsStringStartsWith(this ISQLiteCache cache, string key)
+        public static List<string>? GetAsStringStartsWith(this ISQLiteCache cache, string key, int start = 0, int pageSize = int.MaxValue)
         {
-            return cache.GetStartsWith(key)
-                .Select(p => BynaryContentSerializer.BytesToString(p.Value))
+            return cache.GetStartsWith(key, start, pageSize)
+                .Select(p => BynaryContentSerializer.BytesToString(p?.Value))
                 .ToList();
         }
     }

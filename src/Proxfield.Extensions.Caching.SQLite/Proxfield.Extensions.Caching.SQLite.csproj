@@ -9,7 +9,7 @@
     <PackageIcon>images\logo.png</PackageIcon>
     <PackageIconUrl>https://proxfield.com/public/favicon.png</PackageIconUrl>
     <PackageId>Proxfield.Extensions.Caching.SQLite</PackageId>
-    <Version>0.3.3</Version>
+    <Version>0.3.4</Version>
     <PackageTags>Proxfield</PackageTags>
     <Description>The SQLite Caching Library is layer for caching data on SQLite to be used as a secondary database in case of failures and network inconsistences.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>

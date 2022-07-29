@@ -38,11 +38,13 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public virtual List<SQLiteCacheEntity> GetStartsWithCache(string id)
+        public virtual List<SQLiteCacheEntity> GetStartsWithCache(string id, int start = 0, int pageSize = int.MaxValue)
         {
             return base.RunQueryLikeCommand<SQLiteCacheEntity>(new List<KeyValuePair<string, object>>()
             {
-                new KeyValuePair<string, object>("id", id)
+                new KeyValuePair<string, object>("id", id),
+                new KeyValuePair<string, object>("start", start),
+                new KeyValuePair<string, object>("pageSize", pageSize)
             }, SqlCacheCommands.SELECT_STARTS_WITH_CACHE_COMMAND);
         }
         /// <summary>
