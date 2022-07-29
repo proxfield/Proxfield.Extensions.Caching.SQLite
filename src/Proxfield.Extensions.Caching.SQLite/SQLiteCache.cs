@@ -42,9 +42,9 @@ namespace Proxfield.Extensions.Caching.SQLite
         }
 
         //<inheritdoc />
-        public List<SQLiteCacheEntity> GetStartsWith(string key)
+        public List<SQLiteCacheEntity> GetStartsWith(string key, int start = 0, int pageSize = int.MaxValue)
         {
-            return _cacheOperations.GetStartsWithCache(key.RemoveSpecialChars());
+            return _cacheOperations.GetStartsWithCache(key.RemoveSpecialChars(), start, pageSize);
         }
         //<inheritdoc />
         public Task<byte[]> GetAsync(string key, CancellationToken token = default)
@@ -53,9 +53,9 @@ namespace Proxfield.Extensions.Caching.SQLite
         }
 
         //<inheritdoc />
-        public Task<List<SQLiteCacheEntity>> GetStartsWithAsync(string key, CancellationToken token = default)
+        public Task<List<SQLiteCacheEntity>> GetStartsWithAsync(string key, int start = 0, int pageSize = int.MaxValue, CancellationToken token = default)
         {
-            return Task.FromResult(_cacheOperations.GetStartsWithCache(key));
+            return Task.FromResult(_cacheOperations.GetStartsWithCache(key, start, pageSize));
         }
         //<inheritdoc />
         public void Remove(string key)

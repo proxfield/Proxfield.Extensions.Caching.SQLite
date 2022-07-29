@@ -25,6 +25,9 @@ namespace Proxfield.Extensions.Caching.SQLite.Sample
 
             var indexers = cache.Maintenance.GetAllIndexes();
             Console.WriteLine(JsonSerializer.Serialize(indexers));
+
+            var limit = cache.GetStartsWith("user", 0, 1);
+            Console.WriteLine(limit);
         }
     }
 }

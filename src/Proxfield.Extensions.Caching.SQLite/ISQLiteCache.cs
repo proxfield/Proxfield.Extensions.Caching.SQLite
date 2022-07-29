@@ -50,15 +50,19 @@ namespace Proxfield.Extensions.Caching.SQLite
         /// Get values from the cache when key starts with
         /// </summary>
         /// <param name="key"></param>
+        /// <param name="start"></param>
+        /// <param name="pageSize"></param>
         /// <returns></returns>
-        List<SQLiteCacheEntity> GetStartsWith(string key);
+        List<SQLiteCacheEntity> GetStartsWith(string key, int start = 0, int pageSize = int.MaxValue);
         /// <summary>
         /// Get values from the cache when key starts with asynchronous
         /// </summary>
         /// <param name="key"></param>
         /// <param name="token"></param>
+        /// <param name="start"></param>
+        /// <param name="pageSize"></param>
         /// <returns></returns>
-        Task<List<SQLiteCacheEntity>> GetStartsWithAsync(string key, CancellationToken token = default);
+        Task<List<SQLiteCacheEntity>> GetStartsWithAsync(string key, int start = 0, int pageSize = int.MaxValue, CancellationToken token = default);
         /// <summary>
         /// Clear all the cache from the database (not including indexers)
         /// </summary>
