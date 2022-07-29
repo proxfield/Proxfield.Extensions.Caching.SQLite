@@ -44,6 +44,17 @@ namespace Proxfield.Extensions.Caching.SQLite.Tests.Serialization
         }
 
         [Fact]
+        public void ObjectFromBytes_WhenContentIsEmpty_ShouldReturnDefaultValue()
+        {
+            //Arrange
+            var bytes = Encoding.ASCII.GetBytes("");
+            //Act
+            var result = BynaryContentSerializer.ObjectFromBytes<Example>(bytes);
+            //Assert
+            Assert.Equal(default(Example)?.Value, result?.Value);
+        }
+
+        [Fact]
         public void BytesFromObject_ShouldBeTheSame()
         {
             //Arrange

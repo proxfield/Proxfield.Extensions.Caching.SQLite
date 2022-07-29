@@ -11,9 +11,15 @@ namespace Proxfield.Extensions.Caching.SQLite.Serialization
             => Encoding.ASCII.GetBytes(text);
 
         public static T? ObjectFromBytes<T>(byte[] bytes)
-            => JsonContentSerializer.Deserialize<T>(Encoding.ASCII.GetString(bytes));
+        {
+            var content = Encoding.ASCII.GetString(bytes);
+            if(string.IsNullOrEmpty(content))
+                return default;
 
-        public static byte[] BytesFromObject<T>(T obj)
-            => Encoding.ASCII.GetBytes(JsonContentSerializer.Serialize(obj));
+            return JsonContentSerializer.Deserialize<T>(content);
+        }
+
+        public static byte[] BytesFromObject<T>(T obj) =>
+            Encoding.ASCII.GetBytes(JsonContentSerializer.Serialize(obj));
     }
 }
