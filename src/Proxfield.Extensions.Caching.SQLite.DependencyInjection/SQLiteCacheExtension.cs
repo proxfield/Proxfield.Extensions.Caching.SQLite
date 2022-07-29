@@ -13,7 +13,7 @@ namespace Proxfield.Extensions.Caching.SQLite.DependencyInjection
         /// <param name="services"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static IServiceCollection AddSQLiteCache(this IServiceCollection services, Action<SQLiteCacheOptions> options)
+        public static IServiceCollection AddSQLiteCache(this IServiceCollection services, Action<SQLiteCacheOptions>? options = null)
         {
             services.AddSingleton<ISQLiteCache, SQLiteCache>(c => new SQLiteCache(options));
             return services;
