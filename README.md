@@ -9,8 +9,16 @@ The SQLite Caching Library is layer for caching data on SQLite to be used as a s
 [![Nuget](https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite/actions/workflows/release.yml/badge.svg)](https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite/actions/workflows/release.yml)
 ![GitHub branch checks state](https://img.shields.io/github/checks-status/proxfield/Proxfield.Extensions.Caching.SQLite/main)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/proxfield/Proxfield.Extensions.Caching.SQLite)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/Proxfield.Extensions.Caching.SQLite.svg)](https://www.nuget.org/packages/Proxfield.Extensions.Caching.SQLite)
 
+
+## Packages
+
+Packages and versions available at the Nuget Galery.
+
+| Package                          | Version                                                                                                                                   | Downloads                                                                                                                                  |
+|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| <b>Proxfield.Extensions.Caching.SQLite</b>              | [![Nuget version](https://img.shields.io/nuget/v/Proxfield.Extensions.Caching.SQLite)](https://www.nuget.org/packages/Proxfield.Extensions.Caching.SQLite/)                             | [![Nuget downloads](https://img.shields.io/nuget/dt/Proxfield.Extensions.Caching.SQLite)](https://www.nuget.org/packages/Proxfield.Extensions.Caching.SQLite/)                           |
+| <b>Proxfield.Extensions.Caching.SQLite.DependencyInjection</b>              | [![Nuget version](https://img.shields.io/nuget/v/Proxfield.Extensions.Caching.SQLite)](https://www.nuget.org/packages/Proxfield.Extensions.Caching.SQLite.DependencyInjection/)                             | [![Nuget downloads](https://img.shields.io/nuget/dt/Proxfield.Extensions.Caching.SQLite.DependencyInjection)](https://www.nuget.org/packages/Proxfield.Extensions.Caching.SQLite.DependencyInjection/)                           |
 
 ## Nuget
 ```bash
