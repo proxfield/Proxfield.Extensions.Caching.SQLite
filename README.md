@@ -4,7 +4,6 @@
 The SQLite Caching Library is layer for caching data on SQLite to be used as a secondary database in case of failures and network inconsistences.
 
 ![GitHub License](https://img.shields.io/github/license/proxfield/Proxfield.Extensions.Caching.SQLite)
-[![Version](https://img.shields.io/badge/version-0.3.4-brightgreen.svg)](https://semver.org)
 ![Actions](https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite/actions/workflows/build.yml/badge.svg)
 [![Nuget](https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite/actions/workflows/release.yml/badge.svg)](https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite/actions/workflows/release.yml)
 ![GitHub branch checks state](https://img.shields.io/github/checks-status/proxfield/Proxfield.Extensions.Caching.SQLite/main)
