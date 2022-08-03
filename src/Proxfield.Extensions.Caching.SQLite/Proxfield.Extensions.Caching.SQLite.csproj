@@ -7,7 +7,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
     <Authors>Proxfield</Authors>
-    <PackageIcon>images\cache-logo.png</PackageIcon>
+    <PackageIcon>images\company-logo.png</PackageIcon>
     <PackageIconUrl>https://proxfield.com/public/favicon.png</PackageIconUrl>
     <PackageId>Proxfield.Extensions.Caching.SQLite</PackageId>
     <Version>1.0.3</Version>
