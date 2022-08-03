@@ -1,8 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Proxfield.Extensions.Caching.SQLite
 {
     /// <summary>
     /// Defines the object as a cacheable on
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public abstract class Cacheable
     {
         /// <summary>

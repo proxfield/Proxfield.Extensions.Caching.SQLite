@@ -6,23 +6,24 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-    <PackageIcon>images\logo.png</PackageIcon>
+    <Authors>Proxfield</Authors>
+    <PackageIcon>images\cache-logo.png</PackageIcon>
     <PackageIconUrl>https://proxfield.com/public/favicon.png</PackageIconUrl>
     <PackageId>Proxfield.Extensions.Caching.SQLite</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <PackageTags>Proxfield</PackageTags>
     <Description>The SQLite Caching Library is layer for caching data on SQLite to be used as a secondary database in case of failures and network inconsistences.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite</PackageProjectUrl>
     <RepositoryUrl>https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Company>Proxfield Consultoria</Company>
+    <Company>Proxfield</Company>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\..\docs\images\logo.png" Pack="true" Visible="false" PackagePath="images\logo.png" />
+        <None Include="..\..\docs\images\cache-logo.png" Pack="true" Visible="false" PackagePath="images\cache-logo.png" />
         <None Include="..\..\LICENSE.md">
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
