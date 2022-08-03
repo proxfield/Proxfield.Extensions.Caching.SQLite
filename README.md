@@ -1,5 +1,4 @@
-# Proxfield.Extensions.Caching.SQLite
-
+<img src="docs\images\cache.png" />
 
 
 The SQLite Caching Library is layer for caching data on SQLite to be used as a secondary database in case of failures and network inconsistences.
@@ -125,5 +124,6 @@ SQLite Caching is compiled for DotNet 6, soon there will versions available for 
 - [ ] DotNet 5
 
 ## License
+![GitHub License](https://img.shields.io/github/license/proxfield/Proxfield.Extensions.Caching.SQLite)
 
-The MIT License ([MIT](`LICENSE.md`)) - Copyright (c) 2022 Proxfield
+The MIT License ([MIT](LICENSE.md)) - Copyright (c) 2022 Proxfield
