@@ -1,4 +1,5 @@
-<img src="docs\images\cache.png" />
+
+![cache](https://user-images.githubusercontent.com/7343019/186032840-de9be07f-8b41-448e-825b-f0f60e14e0f2.png)
 
 
 The SQLite Caching Library is layer for caching data on SQLite to be used as a secondary database in case of failures and network inconsistences.
