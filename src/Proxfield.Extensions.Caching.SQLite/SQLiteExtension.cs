@@ -1,4 +1,6 @@
 using Proxfield.Extensions.Caching.SQLite.Serialization;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Proxfield.Extensions.Caching.SQLite
 {
@@ -52,9 +54,9 @@ namespace Proxfield.Extensions.Caching.SQLite
         /// <param name="cache"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static T? GetAsObject<T>(this ISQLiteCache cache, string key)
+        public static T GetAsObject<T>(this ISQLiteCache cache, string key)
         {
-            return BynaryContentSerializer.ObjectFromBytes<T>(cache.Get(key));
+            return BynaryContentSerializer.ObjectFromBytes<T>(cache.Get(key))!;
         }
         /// <summary>
         /// Get a list of objects when the key starts with something

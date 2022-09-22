@@ -7,7 +7,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Serialization
         public static string Serialize<T>(T obj) => 
             JsonSerializer.Serialize(obj);
 
-        public static T? Deserialize<T>(string content) =>
-            JsonSerializer.Deserialize<T>(content);
+        public static T Deserialize<T>(string content) =>
+            JsonSerializer.Deserialize<T>(content)!;
     }
 }

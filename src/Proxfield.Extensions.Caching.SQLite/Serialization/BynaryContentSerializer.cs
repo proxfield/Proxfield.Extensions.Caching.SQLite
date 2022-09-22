@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 namespace Proxfield.Extensions.Caching.SQLite.Serialization
@@ -15,17 +16,17 @@ namespace Proxfield.Extensions.Caching.SQLite.Serialization
         public static byte[] StringToBytes(string text) 
             => Encoding.ASCII.GetBytes(text);
 
-        public static T? ObjectFromBytes<T>(byte[]? bytes)
+        public static T ObjectFromBytes<T>(byte[]? bytes)
         {
             if(bytes == null)
-                return default;
+                return default!;
 
             var content = Encoding.ASCII.GetString(bytes);
             
             if(string.IsNullOrEmpty(content))
-                return default;
+                return default!;
 
-            return JsonContentSerializer.Deserialize<T>(content);
+            return JsonContentSerializer.Deserialize<T>(content)!;
         }
 
         public static byte[] BytesFromObject<T>(T obj) =>

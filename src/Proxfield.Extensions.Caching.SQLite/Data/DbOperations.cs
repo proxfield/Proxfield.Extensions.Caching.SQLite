@@ -1,5 +1,8 @@
 using Microsoft.Data.Sqlite;
 using Proxfield.Extensions.Caching.SQLite.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Proxfield.Extensions.Caching.SQLite.Data
 {
