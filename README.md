@@ -119,10 +119,11 @@ The following list constains all indexing methods avaliable currently on the lib
 
 ## Platform Support
 
-SQLite Caching is compiled for DotNet 6, soon there will versions available for other plataforms.
+SQLite Caching is compiled for the following versions of frameworks:
 
 - [X] DotNet 6
-- [ ] DotNet 5
+- [x] DotNet 5
+- [x] DotNet Core 3.1
 
 ## License
 ![GitHub License](https://img.shields.io/github/license/proxfield/Proxfield.Extensions.Caching.SQLite)
