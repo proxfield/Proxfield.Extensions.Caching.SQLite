@@ -70,7 +70,7 @@ namespace Proxfield.Extensions.Caching.SQLite
                 {
                     var obj = BynaryContentSerializer.ObjectFromBytes<T>(p?.Value);
                     if (obj == null) obj = default;
-                    obj!.Key = p.Key;
+                    obj!.Key = p?.Key;
                     return obj;
                 })
                 .ToList();
