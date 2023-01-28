@@ -59,6 +59,9 @@ services.AddSQLiteCache(options => {
 });
 ```
 
+### Other options
+If the `options.Location` is not provided the database will be stored on the same folder as the projet which implement the library is running.
+
 ## Cache Methods available
 
 The caching can be recorded/retrieved as a simple string
