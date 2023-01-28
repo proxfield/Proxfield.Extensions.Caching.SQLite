@@ -131,4 +131,4 @@ SQLite Caching is compiled for the following versions of frameworks:
 ## License
 ![GitHub License](https://img.shields.io/github/license/proxfield/Proxfield.Extensions.Caching.SQLite)
 
-The MIT License ([MIT](LICENSE.md)) - Copyright (c) 2022 Proxfield
+The MIT License ([MIT](LICENSE.md)) - Copyright (c) 2022-2023 Proxfield Consulting Group and its affiliates
