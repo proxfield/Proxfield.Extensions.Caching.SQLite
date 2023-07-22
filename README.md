@@ -1,5 +1,8 @@
 
-![cache](https://user-images.githubusercontent.com/7343019/186032840-de9be07f-8b41-448e-825b-f0f60e14e0f2.png)
+<p align="center">
+<img src="https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite/assets/7343019/967483a9-c62e-4730-99a3-5f1b1aa0e358" />
+</p>
+
 
 
 The SQLite Caching Library is layer for caching data on SQLite to be used as a secondary database in case of failures and network inconsistences.
