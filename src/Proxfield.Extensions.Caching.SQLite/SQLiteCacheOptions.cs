@@ -1,4 +1,4 @@
-﻿namespace Proxfield.Extensions.Caching.SQLite
+namespace Proxfield.Extensions.Caching.SQLite
 {
     /// <summary>
     /// SQLite Cache Options
@@ -9,5 +9,13 @@
         /// Database file location
         /// </summary>
         public string? Location { get; set; }
+        /// <summary>
+        /// Sets to use encryption
+        /// </summary>
+        public bool UseEncryption { get; set; }
+        /// <summary>
+        /// Sets the encryption key
+        /// </summary>
+        public string? EncryptionKey { get; set; }
     }
 }

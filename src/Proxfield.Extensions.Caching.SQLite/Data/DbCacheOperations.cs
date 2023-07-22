@@ -1,3 +1,4 @@
+using Proxfield.Extensions.Caching.SQLite.Security;
 using Proxfield.Extensions.Caching.SQLite.Sql.Models;
 using Proxfield.Extensions.Caching.SQLite.Sql.Schema;
 using System;

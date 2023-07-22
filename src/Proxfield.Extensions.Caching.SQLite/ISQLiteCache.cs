@@ -1,3 +1,4 @@
+using Proxfield.Extensions.Caching.SQLite.Security;
 using Proxfield.Extensions.Caching.SQLite.Sql.Models;
 using System.Collections.Generic;
 using System.Threading;
@@ -9,7 +10,12 @@ namespace Proxfield.Extensions.Caching.SQLite
     /// Sqlite Cache Interface
     /// </summary>
     public interface ISQLiteCache
-    {       
+    {
+        /// <summary>
+        /// Ecryption provider
+        /// </summary>
+        /// <returns></returns>
+        EncryptionProvider? GetProvider();
         /// <summary>
         /// Get a key from the cache
         /// </summary>

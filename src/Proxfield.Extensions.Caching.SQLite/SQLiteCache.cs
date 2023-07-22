@@ -1,5 +1,6 @@
 using Proxfield.Extensions.Caching.SQLite.Data;
 using Proxfield.Extensions.Caching.SQLite.Extensions;
+using Proxfield.Extensions.Caching.SQLite.Security;
 using Proxfield.Extensions.Caching.SQLite.Sql.Models;
 using Proxfield.Extensions.Caching.SQLite.Utils;
 using System;
@@ -16,6 +17,10 @@ namespace Proxfield.Extensions.Caching.SQLite
     { 
         private readonly SQLiteCacheOptions _options;
         private readonly DbCacheOperations _cacheOperations;
+
+        private readonly EncryptionProvider? _encryptionProvider;
+        public EncryptionProvider? GetProvider() => _encryptionProvider;
+
         public Maintenance Maintenance { get; set; }
         public SQLiteCache(Action<SQLiteCacheOptions>? options = null)
         {
@@ -25,6 +30,9 @@ namespace Proxfield.Extensions.Caching.SQLite
 
             _cacheOperations = new DbCacheOperations(_options.Location);
             this.Maintenance = new Maintenance(_options);
+
+            _encryptionProvider = _options.UseEncryption ?
+                new AesProvider(_options.EncryptionKey) : null;
         }
 
         public SQLiteCache(SQLiteCacheOptions options, 

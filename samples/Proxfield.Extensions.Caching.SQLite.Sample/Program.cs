@@ -1,3 +1,4 @@
+using Proxfield.Extensions.Caching.SQLite.Security;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -9,7 +10,12 @@ namespace Proxfield.Extensions.Caching.SQLite.Sample
     {
         public static void Main(string[] args)
         {
-            var cache = new SQLiteCache();
+            var cache = new SQLiteCache(options =>
+            {
+                options.UseEncryption = true;
+                options.EncryptionKey = EncryptionProvider.GenerateEncryptKey();
+            });
+
             cache.ClearCache();
             cache.Maintenance.ClearAllIndexers();
 
