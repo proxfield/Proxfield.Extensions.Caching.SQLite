@@ -20,7 +20,6 @@ namespace Proxfield.Extensions.Caching.SQLite
 
         private readonly EncryptionProvider? _encryptionProvider;
         public EncryptionProvider? GetProvider() => _encryptionProvider;
-
         public Maintenance Maintenance { get; set; }
         public SQLiteCache(Action<SQLiteCacheOptions>? options = null)
         {
