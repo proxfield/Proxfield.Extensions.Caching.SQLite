@@ -10,7 +10,11 @@ namespace Proxfield.Extensions.Caching.SQLite.Sample
     {
         public static void Main(string[] args)
         {
-            var cache = new SQLiteCache();
+            var cache = new SQLiteCache(options =>
+            {
+                options.EncryptionKey = "123456";
+                options.UseEncryption = true;
+            });
 
             cache.ClearCache();
             cache.Maintenance.ClearAllIndexers();
