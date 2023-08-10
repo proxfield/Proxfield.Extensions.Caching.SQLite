@@ -62,8 +62,20 @@ services.AddSQLiteCache(options => {
 });
 ```
 
-### Other options
-If the `options.Location` is not provided the database will be stored on the same folder as the projet which implement the library is running.
+### Database file location
+If the `options.Location` is not provided the database will be stored on the 
+same folder as the projet which implement the library is running.
+
+
+### Encryption
+To enable the encryption of all the data on the caching database one's just need to set the `UseEncryption` to `true` and set the `EncryptionKey` to any string, as shown bellow:
+
+```csharp
+services.AddSQLiteCache(options => {
+    options.UseEncryption = true;
+    options.EncryptionKey = "d5644e8105ad77c3c3324ba693e83d8fffd54950"
+});
+```
 
 ## Cache Methods available
 
