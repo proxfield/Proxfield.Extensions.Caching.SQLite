@@ -1,5 +1,8 @@
 
-![cache](https://user-images.githubusercontent.com/7343019/186032840-de9be07f-8b41-448e-825b-f0f60e14e0f2.png)
+<p align="center">
+<img src="https://github.com/proxfield/Proxfield.Extensions.Caching.SQLite/assets/7343019/967483a9-c62e-4730-99a3-5f1b1aa0e358" />
+</p>
+
 
 
 The SQLite Caching Library is layer for caching data on SQLite to be used as a secondary database in case of failures and network inconsistences.
@@ -59,8 +62,20 @@ services.AddSQLiteCache(options => {
 });
 ```
 
-### Other options
-If the `options.Location` is not provided the database will be stored on the same folder as the projet which implement the library is running.
+### Database file location
+If the `options.Location` is not provided the database will be stored on the 
+same folder as the projet which implement the library is running.
+
+
+### Encryption
+To enable the encryption of all the data on the caching database one's just need to set the `UseEncryption` to `true` and set the `EncryptionKey` to any string, as shown bellow:
+
+```csharp
+services.AddSQLiteCache(options => {
+    options.UseEncryption = true;
+    options.EncryptionKey = "d5644e8105ad77c3c3324ba693e83d8fffd54950"
+});
+```
 
 ## Cache Methods available
 

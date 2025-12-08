@@ -14,10 +14,10 @@ namespace Proxfield.Extensions.Caching.SQLite
         /// <summary>
         /// Sets to use encryption
         /// </summary>
-        public bool UseEncryption { get; set; } = true;
+        public bool UseEncryption { get; set; } = false;
         /// <summary>
         /// Sets the encryption key
         /// </summary>
-        public string? EncryptionKey { get; set; } = EncryptionProvider.GenerateEncryptKey();
+        public string? EncryptionKey { get; set; }
     }
 }
