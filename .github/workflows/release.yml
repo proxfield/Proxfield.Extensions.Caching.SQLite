@@ -45,7 +45,7 @@ jobs:
             proj-path: src/${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.csproj
 
         - name: Archive Nuget Package
-          uses: actions/upload-artifact@v1
+          uses: actions/upload-artifact@v4
           with:
             name: ${{ env.PROJECT_NAME }}
             path: ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/${{ env.PROJECT_NAME }}.${{ steps.get-version.outputs.version }}.nupkg
