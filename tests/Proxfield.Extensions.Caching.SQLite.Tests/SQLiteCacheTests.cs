@@ -1,3 +1,4 @@
+using Microsoft.Data.Sqlite;
 using Moq;
 using Proxfield.Extensions.Caching.SQLite.Data;
 using System.Text;
@@ -19,7 +20,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Tests
             var repository = new MockRepository(MockBehavior.Strict);
             
             _mockOptions = repository.Create<SQLiteCacheOptions>();
-            _mockDbCache = repository.Create<DbCacheOperations>(_mockOptions.Object.Location);
+            _mockDbCache = repository.Create<DbCacheOperations>(_mockOptions.Object.Location, (SqliteConnection)null);
             _mockMaintenance = repository.Create<Maintenance>(_mockOptions.Object);
 
             _mockDbCache.Setup(x => x.Initialize()).Verifiable();

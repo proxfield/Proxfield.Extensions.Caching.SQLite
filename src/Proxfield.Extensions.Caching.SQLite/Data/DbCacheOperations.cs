@@ -1,3 +1,4 @@
+using Microsoft.Data.Sqlite;
 using Proxfield.Extensions.Caching.SQLite.Security;
 using Proxfield.Extensions.Caching.SQLite.Sql.Models;
 using Proxfield.Extensions.Caching.SQLite.Sql.Schema;
@@ -14,7 +15,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
     /// </summary>
     public class DbCacheOperations : DbOperations
     {
-        public DbCacheOperations(string location) : base(location)
+        public DbCacheOperations(string location, SqliteConnection? connection = null) : base(location, connection)
         {
             CreateIfNotExists();
         }

@@ -12,7 +12,7 @@ namespace Proxfield.Extensions.Caching.SQLite.Sample
         {
             var cache = new SQLiteCache(options =>
             {
-                options.EncryptionKey = "123456";
+                options.EncryptionKey = "d5644e8105ad77c3c3324ba693e83d8fffd54950";
                 options.UseEncryption = true;
             });
 
