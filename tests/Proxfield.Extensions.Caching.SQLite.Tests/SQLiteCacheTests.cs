@@ -1,6 +1,7 @@
 using Moq;
 using Proxfield.Extensions.Caching.SQLite.Data;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -47,10 +48,13 @@ namespace Proxfield.Extensions.Caching.SQLite.Tests
             //Arrange
             const string content = "just a string";
             const string key = "d1";
+
+            CancellationToken cancellationToken = new CancellationToken();
+
             var contentBinary = Encoding.ASCII.GetBytes(content);
-            _mockDbCache.Setup(x => x.InsertCache(key, contentBinary)).Returns(true).Verifiable();
+            _mockDbCache.Setup(x => x.InsertCacheAsync(key, contentBinary, It.IsAny<CancellationToken>())).ReturnsAsync(true).Verifiable();
             //Act
-            var exception = await Record.ExceptionAsync(() => _cache.SetAsync(key, contentBinary));
+            var exception = await Record.ExceptionAsync(() => _cache.SetAsync(key, contentBinary, cancellationToken));
             //Assert
             Assert.Null(exception);
         }

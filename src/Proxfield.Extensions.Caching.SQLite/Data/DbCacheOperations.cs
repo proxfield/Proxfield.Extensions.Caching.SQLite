@@ -4,6 +4,8 @@ using Proxfield.Extensions.Caching.SQLite.Sql.Schema;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Proxfield.Extensions.Caching.SQLite.Data
 {
@@ -88,6 +90,79 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
             {
                 new KeyValuePair<string, object>("id", id)
             }, SqlCacheCommands.DELETE_CACHE_COMMAND) > 0;
+        }
+
+        /// <summary>
+        /// Get an specific data from the database based on its key asynchronously
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public virtual async Task<byte[]> GetCacheAsync(string id, CancellationToken token = default)
+        {
+            var result = await base.RunQueryCommandAsync<SQLiteCacheEntity>(new List<KeyValuePair<string, object>>()
+            {
+                new KeyValuePair<string, object>("id", id)
+            }, SqlCacheCommands.SELECT_CACHE_COMMAND, token);
+
+            return result?.FirstOrDefault()?.Value ?? Array.Empty<byte>();
+        }
+
+        /// <summary>
+        /// Get an specific data from the database based on its key (starting with some word) asynchronously
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="start"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public virtual Task<List<SQLiteCacheEntity>> GetStartsWithCacheAsync(string id, int start = 0, int pageSize = int.MaxValue, CancellationToken token = default)
+        {
+            return base.RunQueryLikeCommandAsync<SQLiteCacheEntity>(new List<KeyValuePair<string, object>>()
+            {
+                new KeyValuePair<string, object>("id", id),
+                new KeyValuePair<string, object>("start", start),
+                new KeyValuePair<string, object>("pageSize", pageSize)
+            }, SqlCacheCommands.SELECT_STARTS_WITH_CACHE_COMMAND, token);
+        }
+
+        /// <summary>
+        /// Inserts a data on the database asynchronously
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="value"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public virtual async Task<bool> InsertCacheAsync(string id, byte[] value, CancellationToken token = default)
+        {
+            return await RunNonQueryCommandAsync(new List<KeyValuePair<string, object>>()
+                {
+                    new KeyValuePair<string, object>("id", id),
+                    new KeyValuePair<string, object>("value", value)
+                },
+            await KeyExistsAsync(id, token) ? SqlCacheCommands.UPDATE_CACHE_COMMAND : SqlCacheCommands.INSERT_CACHE_COMMAND, token) > 0;
+        }
+
+        /// <summary>
+        /// Check if a specific key exists asynchronously
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public virtual async Task<bool> KeyExistsAsync(string key, CancellationToken token = default) => (await GetCacheAsync(key, token)).Length > 0;
+
+        /// <summary>
+        /// Delete an item from the database asynchronously
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public virtual async Task<bool> DeleteAsync(string id, CancellationToken token = default)
+        {
+            return await RunNonQueryCommandAsync(new List<KeyValuePair<string, object>>()
+            {
+                new KeyValuePair<string, object>("id", id)
+            }, SqlCacheCommands.DELETE_CACHE_COMMAND, token) > 0;
         }
 
     }

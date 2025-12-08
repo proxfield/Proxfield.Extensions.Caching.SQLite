@@ -58,15 +58,16 @@ namespace Proxfield.Extensions.Caching.SQLite
             return _cacheOperations.GetStartsWithCache(key.RemoveSpecialChars(), start, pageSize);
         }
         //<inheritdoc />
-        public Task<byte[]> GetAsync(string key, CancellationToken token = default)
+        //<inheritdoc />
+        public async Task<byte[]> GetAsync(string key, CancellationToken token = default)
         {
-            return Task.FromResult(_cacheOperations.GetCache(key));
+            return await _cacheOperations.GetCacheAsync(key, token);
         }
 
         //<inheritdoc />
-        public Task<List<SQLiteCacheEntity>> GetStartsWithAsync(string key, int start = 0, int pageSize = int.MaxValue, CancellationToken token = default)
+        public async Task<List<SQLiteCacheEntity>> GetStartsWithAsync(string key, int start = 0, int pageSize = int.MaxValue, CancellationToken token = default)
         {
-            return Task.FromResult(_cacheOperations.GetStartsWithCache(key, start, pageSize));
+            return await _cacheOperations.GetStartsWithCacheAsync(key, start, pageSize, token);
         }
         //<inheritdoc />
         public void Remove(string key)
@@ -74,9 +75,9 @@ namespace Proxfield.Extensions.Caching.SQLite
             _ = _cacheOperations.Delete(key);
         }
         //<inheritdoc />
-        public Task RemoveAsync(string key, CancellationToken token = default)
+        public async Task RemoveAsync(string key, CancellationToken token = default)
         {
-            return Task.FromResult(_cacheOperations.Delete(key));
+            _ = await _cacheOperations.DeleteAsync(key, token);
         }
         //<inheritdoc />
         public void Set(string key, byte[] value)
@@ -87,9 +88,12 @@ namespace Proxfield.Extensions.Caching.SQLite
             _ = _cacheOperations.InsertCache(key, value);
         }
         //<inheritdoc />
-        public Task SetAsync(string key, byte[] value, CancellationToken token = default)
+        public async Task SetAsync(string key, byte[] value, CancellationToken token = default)
         {
-           return Task.FromResult(_cacheOperations.InsertCache(key, value));
+            if (key.EndsWith("|"))
+                key = Maintenance.Generate(key);
+
+           _ = await _cacheOperations.InsertCacheAsync(key, value, token);
         }
         /// <summary>
         /// Dispose the connection
