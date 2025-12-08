@@ -44,7 +44,10 @@ namespace Proxfield.Extensions.Caching.SQLite
         }
 
         //<inheritdoc />
+        //<inheritdoc />
         public void ClearCache() => _cacheOperations.Truncate();
+        //<inheritdoc />
+        public async Task ClearCacheAsync(CancellationToken token = default) => await _cacheOperations.TruncateAsync(token);
 
         //<inheritdoc />
         public byte[] Get(string key)

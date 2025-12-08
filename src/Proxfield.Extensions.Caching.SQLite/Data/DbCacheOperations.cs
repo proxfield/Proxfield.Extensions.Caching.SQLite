@@ -27,6 +27,15 @@ namespace Proxfield.Extensions.Caching.SQLite.Data
             RunNonQueryCommand(SqlCacheCommands.TRUNCATE_COMMAND);
         }
         /// <summary>
+        /// Clear all the items on the cache database asynchronously
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public async Task TruncateAsync(CancellationToken token = default)
+        {
+            await RunNonQueryCommandAsync(SqlCacheCommands.TRUNCATE_COMMAND, token);
+        }
+        /// <summary>
         /// Get an specific data from the database based on its key
         /// </summary>
         /// <param name="id"></param>

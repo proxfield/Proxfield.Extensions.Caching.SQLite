@@ -71,7 +71,7 @@ To enable data encryption, set `UseEncryption` to `true` and provide an `Encrypt
 ```csharp
 services.AddSQLiteCache(options => {
     options.UseEncryption = true;
-    options.EncryptionKey = "d5644e8105ad77c3c3324ba693e83d8fffd54950";
+    options.EncryptionKey = "d5644e8105ad77c3c3324ba693e83d8f";
 });
 ```
 
@@ -102,11 +102,19 @@ var user = this.cache.GetAsObject<User>("users/1");
 | `void Remove(string key)` | Removes a cached resource from the database. |
 | `Task RemoveAsync(string key)` | Removes a cached resource asynchronously. |
 | `void SetAsString(string key, string value)` | Sets a string in the database. |
+| `Task SetAsStringAsync(string key, string value, CancellationToken token = default)` | Sets a string in the database asynchronously. |
 | `void SetAsObject<T>(string key, T value)` | Sets an object in the database. |
+| `Task SetAsObjectAsync<T>(string key, T value, CancellationToken token = default)` | Sets an object in the database asynchronously. |
 | `string GetAsString(string key)` | Retrieves a string from the database. |
+| `Task<string> GetAsStringAsync(string key, CancellationToken token = default)` | Retrieves a string from the database asynchronously. |
 | `T? GetAsObject<T>(string key)` | Retrieves an object from the database. |
-| `List<T> GetAsObjectStartsWith<T>(this ISQLiteCache cache, string key)` | Gets a list of objects where the key starts with the specified string. |
-| `List<string> GetAsStringStartsWith(this ISQLiteCache cache, string key)` | Gets a list of strings where the key starts with the specified string. |
+| `Task<T?> GetAsObjectAsync<T>(string key, CancellationToken token = default)` | Retrieves an object from the database asynchronously. |
+| `List<T> GetAsObjectStartsWith<T>(string key, int start = 0, int pageSize = int.MaxValue)` | Gets a list of objects where the key starts with the specified string. |
+| `Task<List<T>?> GetAsObjectStartsWithAsync<T>(string key, int start = 0, int pageSize = int.MaxValue, CancellationToken token = default)` | Gets a list of objects where the key starts with the specified string asynchronously. |
+| `List<string> GetAsStringStartsWith(string key, int start = 0, int pageSize = int.MaxValue)` | Gets a list of strings where the key starts with the specified string. |
+| `Task<List<string>?> GetAsStringStartsWithAsync(string key, int start = 0, int pageSize = int.MaxValue, CancellationToken token = default)` | Gets a list of strings where the key starts with the specified string asynchronously. |
+| `void ClearCache()` | Clears all items from the cache (excluding indexes). |
+| `Task ClearCacheAsync(CancellationToken token = default)` | Clears all items from the cache asynchronously. |
 
 ## Collections and Indexes
 

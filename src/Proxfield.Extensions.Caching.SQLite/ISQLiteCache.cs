@@ -76,5 +76,11 @@ namespace Proxfield.Extensions.Caching.SQLite
         /// Clear all the cache from the database (not including indexers)
         /// </summary>
         void ClearCache();
+        /// <summary>
+        /// Clear all the cache from the database (not including indexers) asynchronously
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        Task ClearCacheAsync(CancellationToken token = default);
     }
 }
