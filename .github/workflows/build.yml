@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest    
+    runs-on: ubuntu-20.04    
     outputs: 
       Version: ${{ steps.gitversion.outputs.SemVer }}
       CommitsSinceVersionSource: ${{ steps.gitversion.outputs.CommitsSinceVersionSource }} 
@@ -38,7 +38,7 @@ jobs:
       run: dotnet build --configuration Release
 
   coverage:
-    runs-on: ubuntu-latest    
+    runs-on: ubuntu-20.04    
     needs: build
     if: github.ref == 'refs/heads/main' # only run job if on the main branch 
 
